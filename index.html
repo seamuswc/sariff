@@ -3,30 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ṣarrif — Arabic Verb Conjugator · صرّف</title>
-<meta name="description" content="646 common Arabic verbs conjugated in past, present, and future — color-coded to show exactly what gets added and what changes.">
-<meta property="og:title" content="ṣarrif — Arabic Verb Conjugator">
-<meta property="og:description" content="646 common Arabic verbs, color-coded: prefixes, suffixes, and stem changes at a glance.">
+<title>ṣarrif — Syrian Levantine Verb Conjugator · صرّف</title>
+<meta name="description" content="Syrian Levantine Arabic verbs conjugated in past, present, and future — color-coded to show exactly what gets added and what changes.">
+<meta property="og:title" content="ṣarrif — Syrian Levantine Verb Conjugator">
+<meta property="og:description" content="Syrian Levantine Arabic verbs, color-coded: prefixes, suffixes, and stem changes at a glance.">
 <meta property="og:url" content="https://sarrif.xyz">
 <link rel="canonical" href="https://sarrif.xyz">
 <meta name="robots" content="index, follow">
-<meta name="keywords" content="arabic verb conjugator, arabic conjugation, learn arabic, arabic verbs, تصريف الأفعال, صرف, arabic grammar, past present future arabic, verb forms I-X">
+<meta name="keywords" content="syrian arabic verb conjugator, levantine arabic conjugation, learn arabic, arabic verbs, تصريف الأفعال, شامي, syrian arabic grammar, past present future arabic">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ṣarrif">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="ar_AR">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ṣarrif — Arabic Verb Conjugator">
-<meta name="twitter:description" content="646 common Arabic verbs, color-coded: prefixes, suffixes, and stem changes at a glance.">
+<meta name="twitter:title" content="ṣarrif — Syrian Levantine Verb Conjugator">
+<meta name="twitter:description" content="Syrian Levantine Arabic verbs, color-coded: prefixes, suffixes, and stem changes at a glance.">
 <meta name="theme-color" content="#2B4C9B">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "ṣarrif — Arabic Verb Conjugator",
+  "name": "ṣarrif — Syrian Levantine Verb Conjugator",
   "alternateName": "صرّف",
   "url": "https://sarrif.xyz",
-  "description": "646 common Arabic verbs conjugated in past, present, and future — color-coded to show exactly what gets added and what changes.",
+  "description": "Syrian Levantine Arabic verbs conjugated in past, present, and future — color-coded to show exactly what gets added and what changes.",
   "applicationCategory": "EducationalApplication",
   "operatingSystem": "Any",
   "inLanguage": ["en", "ar"],
@@ -104,12 +104,12 @@ footer{padding:20px 30px;color:var(--muted);font-size:12px;border-top:1px solid 
 </head>
 <body>
 <header>
-  <h1><span class="ar">تصريف الأفعال</span>Arabic Verb Conjugator</h1>
-  <p>646 common verbs · past, present, future · what gets added, what changes</p>
+  <h1><span class="ar">تصريف الأفعال</span>Syrian Levantine Verb Conjugator</h1>
+  <p>Common verbs · past, present, future · what gets added, what changes</p>
 </header>
 <div class="wrap">
   <div class="side">
-    <div class="searchbox"><input id="q" type="search" placeholder="Search: write, katab, كتب…" aria-label="Search verbs"></div>
+    <div class="searchbox"><input id="q" type="search" placeholder="Search: write, ktob, كتب…" aria-label="Search verbs"></div>
     <div id="count"></div>
     <div id="list" role="listbox" aria-label="Verb list"></div>
   </div>
@@ -129,999 +129,653 @@ footer{padding:20px 30px;color:var(--muted);font-size:12px;border-top:1px solid 
 </div>
 <footer>Support — ETH (Ethereum or any L2): <span id="ethaddr" style="font-family:ui-monospace,Menlo,monospace;word-break:break-all;user-select:all;cursor:pointer" title="Click to copy">0x7598557A58F1F0972EE7b66214D546a3328065bE</span></footer>
 <script>
-const T={'ب':'b','ت':'t','ث':'th','ج':'j','ح':'ḥ','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'ṣ','ض':'ḍ','ط':'ṭ','ظ':'ẓ','ع':'ʿ','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ء':'ʾ','أ':'ʾ'};
-const PSUF=[['تُ','tu'],['تَ','ta'],['تِ','ti'],['','a'],['ت','at'],['نا','nā'],['تم','tum'],['وا','ū']];
-const PREA=[['أ','a'],['ت','ta'],['ت','ta'],['ي','ya'],['ت','ta'],['ن','na'],['ت','ta'],['ي','ya']];
-const PREU=[['أ','u'],['ت','tu'],['ت','tu'],['ي','yu'],['ت','tu'],['ن','nu'],['ت','tu'],['ي','yu']];
-const CSUF=[null,null,['ين','īna'],null,null,null,['ون','ūna'],['ون','ūna']];
-const CONSROWS=[0,1,2,5,6];
-
-function fixAr(w){return w.replace(/^أأ/,'آ');}
-function fixTr(w){return w.replace(/^aʾ(?=[^aiuāīū])/,'ā').replace(/^uʾ(?=[^aiuāīū])/,'ū').replace(/^ʾ/,'');}
-
-function makeStems(root,f,opt){
-  opt=opt||'';
-  const r=[...root], t=r.map(c=>T[c]||c);
-  const hollow=(r[1]==='و'||r[1]==='ي'), defect=(r[2]==='و'||r[2]==='ي');
-  const doubled=(r[1]===r[2]&&!defect), assim=(r[0]==='و');
-  const A=opt.includes('A');
-  const S={pv:'a',def:null,mark:{pC:false,pr:false,defPast:true}};
-
-  if(f===1){
-    if(defect){
-      S.defPastBase=[r[0]+r[1], t[0]+'a'+t[1]];
-      S.defGlide = r[2]==='ي'?'ي':'و';
-      S.defI = A;
-      S.def = A?'ā':(r[2]==='ي'?'ī':'ū');
-      const pc = S.def==='ā'?'ى':(S.def==='ī'?'ي':'و');
-      S.pr=[r[0]+r[1]+pc, t[0]+t[1]+(S.def==='ā'?'ā':S.def)];
-      S.mark.pr=true;
-    } else if(hollow){
-      const long=r[1]==='و'?'ū':'ī';
-      const presV = A?'ā':long;
-      const shortV = presV==='ū'?'u':'i';
-      const presAr = presV==='ā'?'ا':(presV==='ū'?'و':'ي');
-      S.pA=[r[0]+'ا'+r[2], t[0]+'ā'+t[2]];
-      S.pC=[r[0]+r[2], t[0]+shortV+t[2]]; S.mark.pC=true;
-      S.pr=[r[0]+presAr+r[2], t[0]+presV+t[2]]; S.mark.pr=true;
-    } else if(doubled){
-      const pv = (opt==='a'||A)?'a':(opt||'u');
-      const cv = pv==='a'?'i':'a';
-      S.pA=[r[0]+r[1], t[0]+'a'+t[1]+t[1]];
-      S.pC=[r[0]+r[1]+r[1], t[0]+'a'+t[1]+cv+t[1]]; S.mark.pC=true;
-      S.pr=[r[0]+r[1], t[0]+pv+t[1]+t[1]]; S.mark.pr=true;
-    } else {
-      let pastV='a', presV=opt||'u';
-      if(opt.length===2&&!A){pastV=opt[0];presV=opt[1];}
-      S.pA=S.pC=[r[0]+r[1]+r[2], t[0]+'a'+t[1]+pastV+t[2]];
-      if(assim){S.pr=[r[1]+r[2], t[1]+presV+t[2]]; S.mark.pr=true;}
-      else S.pr=[r[0]+r[1]+r[2], t[0]+t[1]+presV+t[2]];
-    }
-  }
-  else if(f===2){
-    S.pv='u';
-    if(defect){
-      S.defPastBase=[r[0]+r[1], t[0]+'a'+t[1]+t[1]]; S.defGlide='ي'; S.def='ī';
-      S.pr=[r[0]+r[1]+'ي', t[0]+'a'+t[1]+t[1]+'ī']; S.mark.pr=true;
-    } else {
-      S.pA=S.pC=[r[0]+r[1]+r[2], t[0]+'a'+t[1]+t[1]+'a'+t[2]];
-      S.pr=[r[0]+r[1]+r[2], t[0]+'a'+t[1]+t[1]+'i'+t[2]];
-    }
-  }
-  else if(f===3){
-    S.pv='u';
-    if(defect){
-      S.defPastBase=[r[0]+'ا'+r[1], t[0]+'ā'+t[1]]; S.defGlide='ي'; S.def='ī';
-      S.pr=[r[0]+'ا'+r[1]+'ي', t[0]+'ā'+t[1]+'ī']; S.mark.pr=true;
-    } else {
-      S.pA=S.pC=[r[0]+'ا'+r[1]+r[2], t[0]+'ā'+t[1]+'a'+t[2]];
-      S.pr=[r[0]+'ا'+r[1]+r[2], t[0]+'ā'+t[1]+'i'+t[2]];
-    }
-  }
-  else if(f===4){
-    S.pv='u';
-    if(defect){
-      S.defPastBase=['أ'+r[0]+r[1], 'a'+t[0]+t[1]]; S.defGlide='ى'==='x'?'ى':'ي'; S.defGlide='ي'; S.def='ī';
-      S.pr=[r[0]+r[1]+'ي', t[0]+t[1]+'ī']; S.mark.pr=true;
-    } else if(hollow){
-      S.pA=['أ'+r[0]+'ا'+r[2], 'a'+t[0]+'ā'+t[2]];
-      S.pC=['أ'+r[0]+r[2], 'a'+t[0]+'a'+t[2]]; S.mark.pC=true;
-      S.pr=[r[0]+'ي'+r[2], t[0]+'ī'+t[2]]; S.mark.pr=true;
-    } else if(doubled){
-      S.pA=['أ'+r[0]+r[1], 'a'+t[0]+'a'+t[1]+t[1]];
-      S.pC=['أ'+r[0]+r[1]+r[1], 'a'+t[0]+t[1]+'a'+t[1]]; S.mark.pC=true;
-      S.pr=[r[0]+r[1], t[0]+'i'+t[1]+t[1]]; S.mark.pr=true;
-    } else {
-      S.pA=S.pC=['أ'+r[0]+r[1]+r[2], 'a'+t[0]+t[1]+'a'+t[2]];
-      S.pr=[r[0]+r[1]+r[2], t[0]+t[1]+'i'+t[2]];
-    }
-  }
-  else if(f===5){
-    if(defect){
-      S.defPastBase=['ت'+r[0]+r[1], 'ta'+t[0]+'a'+t[1]+t[1]]; S.defGlide='ي'; S.def='ā';
-      S.pr=['ت'+r[0]+r[1]+'ى', 'ta'+t[0]+'a'+t[1]+t[1]+'ā']; S.mark.pr=true;
-    } else {
-      S.pA=S.pC=['ت'+r[0]+r[1]+r[2], 'ta'+t[0]+'a'+t[1]+t[1]+'a'+t[2]];
-      S.pr=S.pA;
-    }
-  }
-  else if(f===6){
-    S.pA=S.pC=['ت'+r[0]+'ا'+r[1]+r[2], 'ta'+t[0]+'ā'+t[1]+'a'+t[2]];
-    S.pr=S.pA;
-  }
-  else if(f===7){
-    S.pA=S.pC=['ان'+r[0]+r[1]+r[2], 'in'+t[0]+'a'+t[1]+'a'+t[2]];
-    S.pr=['ن'+r[0]+r[1]+r[2], 'n'+t[0]+'a'+t[1]+'i'+t[2]];
-  }
-  else if(f===8){
-    if(defect){
-      S.defPastBase=['ا'+r[0]+'ت'+r[1], 'i'+t[0]+'ta'+t[1]]; S.defGlide='ي'; S.def='ī';
-      S.pr=[r[0]+'ت'+r[1]+'ي', t[0]+'ta'+t[1]+'ī']; S.mark.pr=true;
-    } else if(hollow){
-      S.pA=['ا'+r[0]+'تا'+r[2], 'i'+t[0]+'tā'+t[2]];
-      S.pC=['ا'+r[0]+'ت'+r[2], 'i'+t[0]+'ta'+t[2]]; S.mark.pC=true;
-      S.pr=[r[0]+'تا'+r[2], t[0]+'tā'+t[2]]; S.mark.pr=true;
-    } else if(doubled){
-      S.pA=['ا'+r[0]+'ت'+r[1], 'i'+t[0]+'ta'+t[1]+t[1]];
-      S.pC=['ا'+r[0]+'ت'+r[1]+r[1], 'i'+t[0]+'ta'+t[1]+'a'+t[1]]; S.mark.pC=true;
-      S.pr=[r[0]+'ت'+r[1], t[0]+'ta'+t[1]+t[1]]; S.mark.pr=true;
-    } else {
-      S.pA=S.pC=['ا'+r[0]+'ت'+r[1]+r[2], 'i'+t[0]+'ta'+t[1]+'a'+t[2]];
-      S.pr=[r[0]+'ت'+r[1]+r[2], t[0]+'ta'+t[1]+'i'+t[2]];
-    }
-  }
-  else if(f===10){
-    if(defect){
-      S.defPastBase=['است'+r[0]+r[1], 'ista'+t[0]+t[1]]; S.defGlide='ي'; S.def='ī';
-      S.pr=['ست'+r[0]+r[1]+'ي', 'sta'+t[0]+t[1]+'ī']; S.mark.pr=true;
-    } else if(hollow){
-      S.pA=['است'+r[0]+'ا'+r[2], 'ista'+t[0]+'ā'+t[2]];
-      S.pC=['است'+r[0]+r[2], 'ista'+t[0]+'a'+t[2]]; S.mark.pC=true;
-      S.pr=['ست'+r[0]+'ي'+r[2], 'sta'+t[0]+'ī'+t[2]]; S.mark.pr=true;
-    } else if(doubled){
-      S.pA=['است'+r[0]+r[1], 'ista'+t[0]+'a'+t[1]+t[1]];
-      S.pC=['است'+r[0]+r[1]+r[1], 'ista'+t[0]+t[1]+'a'+t[1]]; S.mark.pC=true;
-      S.pr=['ست'+r[0]+r[1], 'sta'+t[0]+'i'+t[1]+t[1]]; S.mark.pr=true;
-    } else {
-      S.pA=S.pC=['است'+r[0]+r[1]+r[2], 'ista'+t[0]+t[1]+'a'+t[2]];
-      S.pr=['ست'+r[0]+r[1]+r[2], 'sta'+t[0]+t[1]+'i'+t[2]];
-    }
-  }
-  S.kind = defect?'defective':hollow?'hollow':doubled?'doubled':assim?'assimilated (initial w)':(root.includes('أ')||root.includes('ء'))?'hamzated':'regular';
-  return S;
-}
-
-function conjugate(root,f,opt){
-  const S = makeStems(root,f,opt);
-  const past=[], pres=[];
-  if(S.def && S.defPastBase && S.defI){
-    const [ba,bt]=S.defPastBase;
-    for(let i=0;i<8;i++){
-      if(i===3) past.push({ar:fixAr(ba+'ي'), segs:[[fixTr(bt+'iya'),'t']]});
-      else if(i===4) past.push({ar:fixAr(ba+'يت'), segs:[[fixTr(bt+'iy'),'c'],['at','s']]});
-      else if(i===7) past.push({ar:fixAr(ba+'وا'), segs:[[fixTr(bt),'c'],['ū','s']]});
-      else {
-        const [sa,st]=PSUF[i];
-        past.push({ar:fixAr(ba+'ي'+sa), segs:[[fixTr(bt+'ī'),'c'],[st,'s']]});
-      }
-    }
-  }
-  else if(S.def && S.defPastBase){
-    const [ba,bt]=S.defPastBase;
-    const gAr=S.defGlide, gTr=(gAr==='ي')?'ay':'aw';
-    for(let i=0;i<8;i++){
-      if(i===3){
-        const endAr = gAr==='ي'?'ى':'ا';
-        past.push({ar:fixAr(ba+endAr), segs:[[fixTr(bt+'ā'),'t']]});
-      } else if(i===4){
-        past.push({ar:fixAr(ba+'ت'), segs:[[fixTr(bt),'c'],['at','s']]});
-      } else if(i===7){
-        past.push({ar:fixAr(ba+'وا'), segs:[[fixTr(bt),'c'],['aw','s']]});
-      } else {
-        const [sa,st]=PSUF[i];
-        past.push({ar:fixAr(ba+gAr+sa), segs:[[fixTr(bt+gTr),'c'],[st,'s']]});
-      }
-    }
-  } else {
-    for(let i=0;i<8;i++){
-      const cons=CONSROWS.includes(i);
-      const [sta,stt]=cons?S.pC:S.pA;
-      const cls=(cons&&S.mark.pC)?'c':'t';
-      const [sa,st]=PSUF[i];
-      const segs=[[fixTr(stt),cls]]; if(st)segs.push([st,'s']);
-      past.push({ar:fixAr(sta+sa), segs});
-    }
-  }
-  const PRE = S.pv==='u'?PREU:PREA;
-  const [pa,pt]=S.pr;
-  const prCls = S.mark.pr?'c':'t';
-  for(let i=0;i<8;i++){
-    const [fa,ft]=PRE[i];
-    let stemAr=pa, stemTr=pt, sufAr='', sufTr='';
-    if(S.pv==='u'&&stemAr[0]==='أ')stemAr='ؤ'+stemAr.slice(1);
-    if(stemTr.endsWith('iʾ'))stemAr=stemAr.replace(/أ$/,'ئ');
-    if(S.def){
-      if(i===2){
-        if(S.def==='ī'){sufAr='ن';sufTr='na';}
-        else if(S.def==='ū'){stemAr=pa.replace(/و$/,'ي');stemTr=pt.replace(/ū$/,'ī');sufAr='ن';sufTr='na';}
-        else {stemAr=pa.replace(/ى$/,'ي');stemTr=pt.replace(/ā$/,'ay');sufAr='ن';sufTr='na';}
-      } else if(i===6||i===7){
-        if(S.def==='ī'){stemAr=pa.replace(/ي$/,'و');stemTr=pt.replace(/ī$/,'ū');sufAr='ن';sufTr='na';}
-        else if(S.def==='ū'){sufAr='ن';sufTr='na';}
-        else {stemAr=pa.replace(/ى$/,'و');stemTr=pt.replace(/ā$/,'aw');sufAr='ن';sufTr='na';}
-      }
-    } else if(CSUF[i]){ [sufAr,sufTr]=CSUF[i]; }
-    let word = fixAr(fa+stemAr+sufAr);
-    let full = ft+stemTr;
-    const segs=[];
-    if((full.startsWith('aʾ')||full.startsWith('uʾ'))&&stemTr[1]&&!'aiuāīū'.includes(stemTr[1])){
-      const merged = full[0]==='a'?'ā':'ū';
-      segs.push([merged+stemTr.slice(1),'c']);
-      if(full[0]==='u'&&stemAr[0]==='ؤ')word=fixAr('أو'+stemAr.slice(1)+sufAr);
-    } else {
-      segs.push([ft,'p']);
-      segs.push([fixTrMid(stemTr),prCls]);
-    }
-    if(sufTr)segs.push([sufTr,'s']);
-    pres.push({ar:word, segs});
-  }
-  return {past, pres, kind:S.kind, cite:{pastAr:past[3].ar, pastTr:joinSegs(past[3].segs), presAr:pres[3].ar, presTr:joinSegs(pres[3].segs)}};
-}
-function fixTrMid(s){return s;}
-function joinSegs(segs){return segs.map(x=>x[0]).join('');}
-
-const CUSTOM={
-"رأى":{gloss:"see",kind:"doubly irregular (root r-ʾ-y)",
- past:[{ar:"رأيتُ",segs:[["raʾay","c"],["tu","s"]]},{ar:"رأيتَ",segs:[["raʾay","c"],["ta","s"]]},{ar:"رأيتِ",segs:[["raʾay","c"],["ti","s"]]},{ar:"رأى",segs:[["raʾā","t"]]},{ar:"رأت",segs:[["raʾ","c"],["at","s"]]},{ar:"رأينا",segs:[["raʾay","c"],["nā","s"]]},{ar:"رأيتم",segs:[["raʾay","c"],["tum","s"]]},{ar:"رأوا",segs:[["raʾaw","c"]]}],
- pres:[{ar:"أرى",segs:[["a","p"],["rā","c"]]},{ar:"ترى",segs:[["ta","p"],["rā","c"]]},{ar:"ترين",segs:[["ta","p"],["ray","c"],["na","s"]]},{ar:"يرى",segs:[["ya","p"],["rā","c"]]},{ar:"ترى",segs:[["ta","p"],["rā","c"]]},{ar:"نرى",segs:[["na","p"],["rā","c"]]},{ar:"ترون",segs:[["ta","p"],["raw","c"],["na","s"]]},{ar:"يرون",segs:[["ya","p"],["raw","c"],["na","s"]]}]},
-"جاء":{gloss:"come",kind:"hollow + hamzated (root j-y-ʾ)",
- past:[{ar:"جئتُ",segs:[["jiʾ","c"],["tu","s"]]},{ar:"جئتَ",segs:[["jiʾ","c"],["ta","s"]]},{ar:"جئتِ",segs:[["jiʾ","c"],["ti","s"]]},{ar:"جاء",segs:[["jāʾ","t"],["a","s"]]},{ar:"جاءت",segs:[["jāʾ","t"],["at","s"]]},{ar:"جئنا",segs:[["jiʾ","c"],["nā","s"]]},{ar:"جئتم",segs:[["jiʾ","c"],["tum","s"]]},{ar:"جاؤوا",segs:[["jāʾ","t"],["ū","s"]]}],
- pres:[{ar:"أجيء",segs:[["a","p"],["jīʾ","c"]]},{ar:"تجيء",segs:[["ta","p"],["jīʾ","c"]]},{ar:"تجيئين",segs:[["ta","p"],["jīʾ","c"],["īna","s"]]},{ar:"يجيء",segs:[["ya","p"],["jīʾ","c"]]},{ar:"تجيء",segs:[["ta","p"],["jīʾ","c"]]},{ar:"نجيء",segs:[["na","p"],["jīʾ","c"]]},{ar:"تجيئون",segs:[["ta","p"],["jīʾ","c"],["ūna","s"]]},{ar:"يجيئون",segs:[["ya","p"],["jīʾ","c"],["ūna","s"]]}]},
-"اتصل":{gloss:"call, contact",kind:"form VIII of w-ṣ-l (w assimilates to t)",
- s:{pA:["اتصل","ittaṣal"],pC:["اتصل","ittaṣal"],pr:["تصل","ttaṣil"],pv:"a",markC:false,markP:true}},
-"اتخذ":{gloss:"adopt, take on",kind:"form VIII of ʾ-kh-dh (ʾ assimilates to t)",
- s:{pA:["اتخذ","ittakhadh"],pC:["اتخذ","ittakhadh"],pr:["تخذ","ttakhidh"],pv:"a",markC:false,markP:true}},
-"اتفق":{gloss:"agree",kind:"form VIII of w-f-q (w assimilates to t)",
- s:{pA:["اتفق","ittafaq"],pC:["اتفق","ittafaq"],pr:["تفق","ttafiq"],pv:"a",markC:false,markP:true}},
-"اتهم":{gloss:"accuse",kind:"form VIII of w-h-m (w assimilates to t)",
- s:{pA:["اتهم","ittaham"],pC:["اتهم","ittaham"],pr:["تهم","ttahim"],pv:"a",markC:false,markP:true}},
-"اتجه":{gloss:"head toward",kind:"form VIII of w-j-h (w assimilates to t)",
- s:{pA:["اتجه","ittajah"],pC:["اتجه","ittajah"],pr:["تجه","ttajih"],pv:"a",markC:false,markP:true}}
+const VERBS=[
+  ["كتب","byiktob","reg","write"],
+  ["قال","byiʔuul","irr","say"],
+  ["عمل","byiʕmel","reg","do, work"],
+  ["راح|رح","byiruuH","hollow","go"],
+  ["إجا","byiiji","irr","come"],
+  ["شاف|شف","byishuuf","hollow","see"],
+  ["أخد","byaaxud","reg","take"],
+  ["عرف","byiʕraf","reg","know"],
+  ["لقى","byilaaʔi","def","find, meet"],
+  ["قدر","byiʔdar","reg","be able"],
+  ["صار|صر","byisiiR","hollow","become"],
+  ["ظل","byiZall","reg","remain"],
+  ["بقى","byibʔa","def","stay"],
+  ["قرأ","byiʔra","reg","read"],
+  ["سمع","byismaʕ","reg","hear"],
+  ["كلم","byikallim","reg","speak"],
+  ["حكى","byiHkii","def","tell, speak"],
+  ["فهم","byifham","reg","understand"],
+  ["فكر","byifakkar","reg","think"],
+  ["تذكر","byitḏakkar","reg","remember"],
+  ["نسي","byinsa","reg","forget"],
+  ["حب","byiHibb","doubled","love, like"],
+  ["كره","byikrah","reg","hate"],
+  ["حس","byiHiss","reg","feel"],
+  ["بلش","byiballish","reg","begin"],
+  ["خلص","byikhalles","reg","finish"],
+  ["وقف","byiwʔif","reg","stop"],
+  ["كمل","byikammil","reg","complete"],
+  ["حاول","byiHaawil","reg","try"],
+  ["طلب","byiṭlub","reg","request, ask for"],
+  ["عطى","byiʕṭii","def","give"],
+  ["حط","byiHuTT","doubled","put"],
+  ["ترك","byitrak","reg","leave"],
+  ["دخل","byidkhul","reg","enter"],
+  ["طلع","byiṭlaʕ","reg","go out, rise"],
+  ["رجع","byirjaʕ","reg","return"],
+  ["وصل","byiwSil","reg","arrive"],
+  ["مشى","byimshii","def","walk"],
+  ["ركض","byirkud","reg","run"],
+  ["قعد","byiʕud","reg","sit down"],
+  ["نام|نم","byinuum","hollow","sleep"],
+  ["أكل","byaakul","reg","eat"],
+  ["شرب","byishrab","reg","drink"],
+  ["طبخ","byiṭbukh","reg","cook"],
+  ["غسل","byighsil","reg","wash"],
+  ["لبس","byilbis","reg","wear"],
+  ["سكن","byiskun","reg","live, reside"],
+  ["عاش|عيش","byiʔiiʃ","hollow","live"],
+  ["مات|موت","byimuut","hollow","die"],
+  ["كبر","byikbir","reg","grow up"],
+  ["تجوز","byitjawwiz","reg","get married"],
+  ["حمل","byiHmil","reg","carry"],
+  ["ساعد","byisaaʕid","reg","help"],
+  ["خدم","byikhudum","reg","serve"],
+  ["قابل","byiqaabil","reg","meet"],
+  ["زار|زور","byizuur","hollow","visit"],
+  ["دعا|دعو","byidʕii","def","invite, call"],
+  ["رحب","byirHab","reg","welcome"],
+  ["ودع","byiwdaʕ","reg","bid farewell"],
+  ["شكر","byishkur","reg","thank"],
+  ["سامح","byisaamiH","reg","forgive"],
+  ["وعد","byiwʕad","reg","promise"],
+  ["كذب","byikdhib","reg","lie"],
+  ["سأل","byisal","reg","ask"],
+  ["رد","byirud","reg","reply"],
+  ["شرح","byishraH","reg","explain"],
+  ["وصف","byiSif","reg","describe"],
+  ["ناقش","byinaaqish","reg","discuss"],
+  ["قرر","byiqarrar","reg","decide"],
+  ["اختار","byikhtaar","reg","choose"],
+  ["فضل","byifDall","reg","prefer"],
+  ["قبل","byiqbil","reg","accept"],
+  ["منع","byimnaʕ","reg","prevent, forbid"],
+  ["سمح","byismaH","reg","allow"],
+  ["أمر","byiaamur","reg","order, command"],
+  ["نصح","byinaSHaH","reg","advise"],
+  ["حذر","byiHdhar","reg","warn"],
+  ["هدد","byihaddid","reg","threaten"],
+  ["أكد","byiakkid","reg","confirm"],
+  ["شك","byishakk","reg","doubt"],
+  ["توقع","byitawaqqaʕ","reg","expect"],
+  ["تخيل","byitkayyal","reg","imagine"],
+  ["حلم","byiHlum","reg","dream"],
+  ["أمل","byiaamul","reg","hope"],
+  ["خطط","byikhaTTiT","reg","plan"],
+  ["قصد","byiqSud","reg","intend"],
+  ["نوى","byinwii","def","intend"],
+  ["جهز","byijahhiz","reg","prepare"],
+  ["حضر","byiHaDhar","reg","attend, be present"],
+  ["رتب","byirattib","reg","arrange"],
+  ["بدل","byibdal","reg","change"],
+  ["غير","byighayyar","reg","change (something)"],
+  ["زاد|زيد","byiziid","hollow","increase"],
+  ["نقص","byinaqaS","reg","decrease"],
+  ["رفع","byirfaʕ","reg","raise, lift"],
+  ["خفض","byikhafD","reg","lower"],
+  ["فتح","byiftaH","reg","open"],
+  ["سكر","byiskar","reg","close"],
+  ["كسر","byiksur","reg","break"],
+  ["صلح","byiSlaH","reg","fix, repair"],
+  ["بنى","byibnii","def","build"],
+  ["هدم","byihdim","reg","demolish"],
+  ["صنع","byiSnaʕ","reg","make, manufacture"],
+  ["نشر","byinshur","reg","publish"],
+  ["وزع","byiwaziʕ","reg","distribute"],
+  ["جمع","byijmaʕ","reg","gather"],
+  ["فصل","byifSall","reg","separate"],
+  ["خلط","byikhalTiT","reg","mix"],
+  ["ربط","byirbuT","reg","tie, connect"],
+  ["حل","byiHall","reg","solve"],
+  ["فك","byifkak","reg","undo"],
+  ["قطع","byiqTaʕ","reg","cut"],
+  ["لصق","byilSaq","reg","stick"],
+  ["علق","byiʕalliq","reg","hang"],
+  ["ثبت","byithabbit","reg","fix in place"],
+  ["ركب","byirkab","reg","install, ride"],
+  ["نزل","byinzil","reg","descend, get off"],
+  ["صعد","byiSʕud","reg","climb, go up"],
+  ["طار|طير","byiTiiR","hollow","fly"],
+  ["سبح","byisbaH","reg","swim"],
+  ["قفز","byiqfiz","reg","jump"],
+  ["وقع","byiwqaʕ","reg","fall, happen"],
+  ["رمى","byirmii","def","throw"],
+  ["مسك","byimsik","reg","grab, hold"],
+  ["سحب","byisHab","reg","pull"],
+  ["جرّ","byijarr","reg","drag"],
+  ["دفع","byidfaʕ","reg","push, pay"],
+  ["حرك","byiHarrik","reg","move (something)"],
+  ["نقل","byinʔul","reg","transport"],
+  ["جاب|جيب","byijiib","hollow","bring"],
+  ["بعت","byibʕat","reg","send"],
+  ["سلم","byisallim","reg","hand over"],
+  ["وزن","byiwazin","reg","weigh"],
+  ["عدّ","byiʕidd","reg","count"],
+  ["حسب","byiHsab","reg","calculate"],
+  ["ضرب","byiDrib","reg","hit"],
+  ["ساوى","byisaawii","def","equal"],
+  ["قيّم","byiqayyim","reg","evaluate"],
+  ["كلف","byikallif","reg","cost"],
+  ["اشترى","byishtarii","def","buy"],
+  ["باع|بيع","byibiiʕ","hollow","sell"],
+  ["كسب","byiksab","reg","earn"],
+  ["ربح","byirbaH","reg","profit"],
+  ["خسر","byikhsar","reg","lose"],
+  ["صرف","byiSrif","reg","spend, exchange"],
+  ["وفّر","byiwaffir","reg","save"],
+  ["اقترض","byiqtiraD","reg","borrow"],
+  ["سدد","byisaddid","reg","pay back"],
+  ["صدر","byiSdir","reg","export"],
+  ["ورّد","byiwarrid","reg","import"],
+  ["ملك","byimilak","reg","own"],
+  ["قبض","byiqbiD","reg","receive"],
+  ["حوّل","byiHawwil","reg","transfer"],
+  ["سرع","byisraʕ","reg","hurry"],
+  ["تأخر","byitaʔakhkhar","reg","be late"],
+  ["انتظر","byintaZar","reg","wait"],
+  ["بدا","byibda","reg","seem"],
+  ["ظهر","byiZhar","reg","appear"],
+  ["اختفى","byikhtafii","def","disappear"],
+  ["غاب","byighaab","reg","be absent"],
+  ["مطر","byimṭar","reg","rain"],
+  ["زرع","byizraʕ","reg","plant"],
+  ["حصد","byiHSud","reg","harvest"],
+  ["سقى","byisqii","def","water"],
+  ["قطف","byiqTuf","reg","pick"],
+  ["نضج","byinaDj","reg","ripen"],
+  ["فسد","byifsud","reg","spoil"],
+  ["قلى","byiqallii","def","fry"],
+  ["سلق","byisluq","reg","boil"],
+  ["شوى","byishwii","def","grill"],
+  ["خبز","byikhbez","reg","bake bread"],
+  ["عجن","byiʕjin","reg","knead"],
+  ["ذاق","byidhaaq","reg","taste"],
+  ["بلع","byibilʕ","reg","swallow"],
+  ["مضغ","byimDagh","reg","chew"],
+  ["هضم","byihDum","reg","digest"],
+  ["جوع|جيع","byijiiʕ","hollow","be hungry"],
+  ["عطش","byiʕṭash","reg","be thirsty"],
+  ["شبع","byishbaʕ","reg","be full"],
+  ["قدّم","byiqaddim","reg","offer"],
+  ["حجز","byiHjiz","reg","reserve"],
+  ["غنّى","byighannii","def","sing"],
+  ["رقص","byirquS","reg","dance"],
+  ["عزف","byiʕzif","reg","play (instrument)"],
+  ["لعب","byilʕab","reg","play"],
+  ["فاز|فوز","byifuuZ","hollow","win"],
+  ["سجّل","byisajjal","reg","record"],
+  ["ضحك","byiDHak","reg","laugh"],
+  ["بسم","byibassim","reg","smile"],
+  ["بكى","byibkii","def","cry"],
+  ["حزن","byiHzan","reg","be sad"],
+  ["فرح","byifraH","reg","be happy"],
+  ["غضب","byighaDab","reg","be angry"],
+  ["خجل","byikhjil","reg","be shy"],
+  ["ندم","byinadm","reg","regret"],
+  ["قلق","byiqlaq","reg","worry"],
+  ["خاف|خوف","byikhaaf","hollow","fear"],
+  ["اشتاق|شوق","byishtaaq","hollow","miss, long for"],
+  ["رتاح|رتح","byirtaaH","hollow","rest, relax"],
+  ["ملّ","byimall","doubled","be bored"],
+  ["تعب","byitʕab","reg","get tired"],
+  ["مرض","byimraD","reg","get sick"],
+  ["شفى","byishfii","def","heal"],
+  ["تنفّس","byitnaffas","reg","breathe"],
+  ["سعل","byisʕal","reg","cough"],
+  ["عطس","byiʕTas","reg","sneeze"],
+  ["جرح","byijraH","reg","wound"],
+  ["فحص","byifHaS","reg","examine"],
+  ["دوّى","byidawwii","def","treat"],
+  ["حمّم","byiHammim","reg","bathe"],
+  ["حلق","byiHlaq","reg","shave"],
+  ["درس","byidrus","reg","study"],
+  ["درّس","byidarris","reg","teach"],
+  ["علّم","byiʕallim","reg","teach"],
+  ["تعلّم","byitʕallam","reg","learn"],
+  ["حفظ","byiHfaZ","reg","memorize"],
+  ["راجع","byiraajiʕ","reg","review"],
+  ["امتحن","byimtaHin","reg","test, examine"],
+  ["نجح","byinjaH","reg","succeed"],
+  ["رسب","byirasab","reg","fail (exam)"],
+  ["فشل","byifshal","reg","fail"],
+  ["تخرّج","byitkharraj","reg","graduate"],
+  ["انضمّ","byinDamm","doubled","join"],
+  ["لخّص","byilakhkhaS","reg","summarize"],
+  ["فسّر","byifassir","reg","explain"],
+  ["عبّر","byiʕabbar","reg","express"],
+  ["بحث","byibḤath","reg","search"],
+  ["كشف","byikshaf","reg","discover"],
+  ["اخترع","byikhtariʕ","reg","invent"],
+  ["جرّب","byijarrab","reg","try, test"],
+  ["حلّل","byiHallil","reg","analyze"],
+  ["قارن","byiqaarin","reg","compare"],
+  ["لاحظ","byilaHZaZ","reg","notice"],
+  ["ركّز","byirakkiz","reg","focus"],
+  ["نسخ","byinsakh","reg","copy"],
+  ["حذف","byiHdaf","reg","delete"],
+  ["ضاف","byiDaaf","reg","add"],
+  ["عدّل","byiʕaddil","reg","adjust"],
+  ["صحّح","byiSallal","reg","correct"],
+  ["حمّل","byiHammi","reg","download"],
+  ["نزّل","byinazzil","reg","download"],
+  ["شغّل","byishaggil","reg","operate, turn on"],
+  ["طفى","byiTfii","def","turn off"],
+  ["وصل","byiwSil","reg","connect"],
+  ["اتصل","byitlaSil","reg","call, contact"],
+  ["استخدم","byistakhdum","reg","use"],
+  ["طبّق","byiṭabbiq","reg","apply"],
+  ["نفّذ","byinaffiḍ","reg","carry out"],
+  ["وظّف","byiwazZif","reg","employ"],
+  ["عيّن","byiʕayyin","reg","appoint"],
+  ["استقال","byistaqiil","reg","resign"],
+  ["تقاعد","byitqaaʕad","reg","retire"],
+  ["دوّر","byidawwar","reg","manage, run"],
+  ["نظّف","byinazzif","reg","clean"],
+  ["كنس","byiknis","reg","sweep"],
+  ["مسح","byimsiH","reg","wipe"],
+  ["كوي","byikwii","def","iron"],
+  ["خيط","byikhuuT","hollow","sew"],
+  ["حدّد","byiHaddid","reg","specify"],
+  ["وضّح","byiwadDaH","reg","clarify"],
+  ["بيّن","byibayyin","reg","show"],
+  ["دلّ","byidull","doubled","indicate"],
+  ["قاد","byiqaad","reg","lead, drive"],
+  ["ساق","byisaaq","reg","drive"],
+  ["قوم","byiquum","hollow","rise, stand up"],
+  ["دافع","byidaafiʕ","reg","defend"],
+  ["هاجم","byihaajim","reg","attack"],
+  ["حارب","byiHaarib","reg","fight (war)"],
+  ["قتل","byiʔtil","reg","kill"],
+  ["انتصر","byintasiir","hollow","triumph"],
+  ["هزم","byihzim","reg","defeat"],
+  ["استسلم","byistaslim","reg","surrender"],
+  ["حمى","byiHma","reg","protect"],
+  ["أنقذ","byinqiḍ","reg","rescue"],
+  ["خطف","byikhuTuf","reg","kidnap"],
+  ["سرق","byisrig","reg","steal"],
+  ["خدع","byikhdaʕ","reg","deceive"],
+  ["حقّق","byiHaqqiq","reg","achieve"],
+  ["أحرق","byiHraq","reg","burn"],
+  ["غرق","byighraq","reg","drown"],
+  ["غطس","byighTuS","reg","dive"],
+  ["عوم","byiʕuum","hollow","float, swim"],
+  ["حفر","byiHfur","reg","dig"],
+  ["دفن","byidfin","reg","bury"],
+  ["لمس","byilmas","reg","touch"],
+  ["ضغط","byiDghuT","reg","press"],
+  ["دق","byiduq","reg","knock"],
+  ["طرق","byiṭruq","reg","knock"],
+  ["فرك","byifruk","reg","rub"],
+  ["عصر","byiʕSir","reg","squeeze"],
+  ["سكب","byiskub","reg","pour"],
+  ["ملّأ","byimallii","def","fill"],
+  ["فرغ","byifragh","reg","empty"],
+  ["رشّ","byirushsh","doubled","spray"],
+  ["نفخ","byinfugh","reg","blow"],
+  ["مصّ","byimuSS","doubled","suck"],
+  ["عضّ","byiʕaDD","doubled","bite"],
+  ["خدش","byikhduSH","reg","scratch"],
+  ["قرص","byiqruS","reg","pinch"],
+  ["شدّ","byishudd","doubled","pull tight"],
+  ["لوى","byilwii","def","twist"],
+  ["ثنى","byithnii","def","fold"],
+  ["طوى","byiTwii","def","fold"],
+  ["بسط","byibsuT","reg","spread out"],
+  ["مدّ","byimudd","doubled","extend"],
+  ["لفّ","byiluff","doubled","wrap"],
+  ["غطّى","byighaTTii","def","cover"],
+  ["فرش","byifrish","reg","furnish"],
+  ["زيّن","byizayyin","reg","decorate"],
+  ["ذكّر","byiḏakkar","reg","remind"],
+  ["سلّق","byisallaq","reg","climb (tree)"],
+  ["زلق","byizlaq","reg","slip"],
+  ["زحف","byizHaf","reg","crawl"],
+  ["ركل","byirkul","reg","kick"],
+  ["صدّ","byiSud","doubled","block"],
+  ["مرّ","byimur","reg","pass"],
+  ["دام","byidaam","reg","last"],
+  ["أجل","byiaajil","reg","postpone"],
+  ["دار","byiduur","hollow","turn"],
+  ["ذكر","byiʔkur","reg","mention"],
+  ["شغل","byishghul","reg","work, be employed"],
+  ["جهد","byijhad","reg","work hard"],
+  ["جمع","byijmaʕ","reg","meet, assemble"],
+  ["قرب","byiqrub","reg","approach"],
+  ["عمد","byiʕmid","reg","rely on"],
+  ["نشر","byinshur","reg","spread"],
+  ["فقد","byifqid","reg","miss (someone)"],
+  ["بدأ","byibda","reg","start"],
+  ["عوّد","byiʕawwid","reg","be accustomed"],
+  ["ردّى","byirdii","def","wear, put on"],
+  ["خلع","byikhlaaʕ","reg","take off (clothes)"],
+  ["وسع","byiwsiʕ","reg","be wide enough"],
+  ["ضحك","byiDHaak","reg","make laugh"],
+  ["بكى","byibkii","def","make cry"],
+  ["نجز","byinajjiz","reg","accomplish"],
+  ["خطأ","byikhta","reg","make a mistake"],
+  ["صدر","byiSdir","reg","issue, publish"],
+  ["لغى","byilghii","def","cancel"],
+  ["مضى","byimDii","def","spend (time)"],
+  ["مكن","byimkin","reg","be possible, enable"],
+  ["زعج","byizʕaj","reg","annoy"],
+  ["قلع","byiqlaaʕ","reg","take off (plane)"],
+  ["دخل","byidakhkhal","reg","insert"],
+  ["خرج","byikhrij","reg","take out"],
+  ["ظهر","byiDhir","reg","show, display"],
+  ["خفي","byikhfa","reg","hide (something)"],
+  ["زال","byizaal","reg","remove"],
+  ["محا","byimHaa","reg","erase"],
+  ["زهر","byizhar","reg","bloom"],
+  ["فاد","byifaad","reg","benefit"],
+  ["طاع","byiTaaʕ","reg","obey"],
+  ["عاد","byiʕaad","reg","repeat"],
+  ["قام","byiquum","hollow","hold (event)"],
+  ["نهض","byinhaD","reg","get up"],
+  ["رقد","byirqad","reg","lie down"],
+  ["جنّب","byijannib","reg","avoid"],
+  ["قدّم","byiqaddam","reg","advance, apply"],
+  ["دخل","byidakhkhal","reg","intervene"],
+  ["حمل","byiHma","reg","bear, endure"],
+  ["خلّص","byikhalles","reg","get rid of"],
+  ["صرف","byiSraf","reg","behave, act"],
+  ["عرف","byiʕraf","reg","get to know"],
+  ["لقى","byilʔa","def","receive (news)"],
+  ["سبق","byisbaq","reg","precede"],
+  ["لحق","byilHaqq","doubled","catch up"],
+  ["تبع","byitbaʕ","reg","follow"],
+  ["طرد","byiṭrud","reg","expel"],
+  ["هرب","byihrub","reg","escape"],
+  ["سبح","byisbaH","reg","praise"],
+  ["حيّر","byiHayyir","reg","confuse"],
+  ["آذن","byiaadhan","reg","call to prayer"],
+  ["أثر","byiaathar","reg","influence"],
+  ["نصر","byinSar","reg","support"],
+  ["عزم","byiʕzim","reg","resolve"],
+  ["نجا","byinja","reg","survive"],
+  ["قطع","byiqTaʕ","reg","be cut off"],
+  ["فجر","byifjir","reg","explode"],
+  ["سحب","byisHab","reg","withdraw"],
+  ["فتح","byiftaH","reg","open (intr.)"],
+  ["فصل","byifSil","reg","separate (intr.)"],
+  ["شرك","byishrik","reg","subscribe"],
+  ["حوى","byiHwii","def","contain"],
+  ["ضمّن","byiDmann","doubled","include"],
+  ["شمل","byishmil","reg","include"],
+  ["حوّط","byiHawwiT","reg","surround"],
+  ["وسّع","byiwassiʕ","reg","widen"],
+  ["قلّص","byiʔalliS","reg","reduce"],
+  ["خصّص","byikhassiS","reg","allocate"],
+  ["فوّض","byifawwaD","reg","delegate"],
+  ["رشّح","byirashshaH","reg","nominate"],
+  ["صحّ","byiSallal","reg","be correct"],
+  ["غلط","byighluT","reg","make a mistake"],
+  ["حسد","byiHsad","reg","envy"],
+  ["افتخر","byiftakhar","reg","be proud"],
+  ["ثقّف","byithaqaf","reg","educate"],
+  ["درك","byidrak","reg","realize"],
+  ["حيّر","byiHayyar","reg","be confused"],
+  ["ردّد","byiraddid","reg","hesitate"],
+  ["جرأ","byijarra","reg","dare"],
+  ["خطر","byikhtur","reg","occur (to mind)"],
+  ["بدّى","byibdii","def","express, show"],
+  ["جرى","byijr","reg","conduct"],
+  ["لزم","byilzim","reg","be necessary"],
+  ["التزم","byiltazim","reg","commit to"],
+  ["كفى","byikfa","reg","be enough"],
+  ["كفل","byikfil","reg","sponsor"],
+  ["خضع","byikhaDaʕ","reg","submit"],
+  ["رغب","byirghab","reg","desire"],
+  ["أجبر","byiaajbar","reg","force"],
+  ["حرص","byiHraS","reg","be keen"],
+  ["عشق","byiʕshaq","reg","adore"],
+  ["غار","byighaar","hollow","be jealous"],
+  ["وثق","byiwathiq","reg","trust"],
+  ["أمن","byiaamin","reg","be safe"],
+  ["خان","byikhaan","hollow","betray"],
+  ["خلص","byikhlas","reg","be loyal"],
+  ["ضحّى","byiDHa","reg","sacrifice"],
+  ["كرّم","byikarrim","reg","honor"],
+  ["هان","byihaan","hollow","insult"],
+  ["حقر","byiHqir","reg","despise"],
+  ["سخر","byiskhar","reg","mock"],
+  ["مزح","byimzah","reg","joke"],
+  ["سلّى","byisallii","def","entertain"],
+  ["روى","byirwii","def","narrate"],
+  ["حكى","byiHkii","def","tell"],
+  ["زعم","byizʕam","reg","claim"],
+  ["نفى","byinfa","reg","deny"],
+  ["برّر","byibarrir","reg","justify"],
+  ["فند","byifnid","reg","refute"],
+  ["ثبت","byithabbit","reg","prove"],
+  ["غمض","byighmaD","reg","close (eyes)"],
+  ["حجب","byiHjab","reg","block"],
+  ["ستر","byistar","reg","conceal"],
+  ["فضح","byifDaH","reg","expose"],
+  ["علا","byiʕla","reg","rise"],
+  ["هوى","byihwii","def","fall; love"],
+  ["غاص","byighuus","hollow","dive"],
+  ["طفا","byiTfaa","reg","float"],
+  ["رسا","byirsaa","reg","anchor"],
+  ["بحر","byibHar","reg","set sail"],
+  ["واصل","byiwaaSil","reg","continue"],
+  ["كرّر","byikarrar","reg","repeat"],
+  ["عزل","byiʕzil","reg","isolate"],
+  ["فصل","byifSil","reg","separate"],
+  ["وحّد","byiwaHHid","reg","unify"],
+  ["دمج","byidmaj","reg","merge"],
+  ["ضمّ","byiDumm","doubled","annex"],
+  ["خزن","byikhazin","reg","store"],
+  ["سرد","byisrud","reg","recount"],
+  ["صنّف","byiSannif","reg","classify"],
+  ["شفّر","byishaffir","reg","encrypt"],
+  ["خمّن","byikhammin","reg","guess"],
+  ["جزم","byijzim","reg","assert"],
+];
+const IRREGULAR={
+  "قال":{past:["\u0642\u0644\u062a", "\u0642\u0644\u062a", "\u0642\u0644\u062a\u064a", "\u0642\u0627\u0644", "\u0642\u0627\u0644\u062a", "\u0642\u0644\u0646\u0627", "\u0642\u0644\u062a\u0648", "\u0642\u0627\u0644\u0648\u0627"],pres:["\u0628\u0642\u0648\u0644", "\u0628\u062a\u0642\u0648\u0644", "\u0628\u062a\u0642\u0648\u0644\u064a", "\u0628\u064a\u0642\u0648\u0644", "\u0628\u062a\u0642\u0648\u0644", "\u0645\u0646\u0642\u0648\u0644", "\u0628\u062a\u0642\u0648\u0644\u0648\u0627", "\u0628\u064a\u0642\u0648\u0644\u0648\u0627"],kind:"irregular (root q-w-l)"},
+  "إجا":{past:["\u062c\u064a\u062a", "\u062c\u064a\u062a", "\u062c\u064a\u062a\u064a", "\u0625\u062c\u0627", "\u0625\u062c\u062a", "\u062c\u064a\u0646\u0627", "\u062c\u064a\u062a\u0648", "\u0625\u062c\u0648"],pres:["\u0628\u0627\u062c\u064a", "\u0628\u062a\u0627\u062c\u064a", "\u0628\u062a\u0627\u062c\u064a", "\u0628\u064a\u0627\u062c\u064a", "\u0628\u062a\u0627\u062c\u064a", "\u0645\u0646\u0627\u062c\u064a", "\u0628\u062a\u0627\u062c\u0648\u0627", "\u0628\u064a\u0627\u062c\u0648\u0627"],kind:"irregular (root j-y-ʾ)"},
 };
 
-function conjCustomS(c){
-  const past=[],pres=[];
-  for(let i=0;i<8;i++){
-    const [sa,st]=PSUF[i];
-    const segs=[[c.s.pC[1], c.s.markC&&CONSROWS.includes(i)?'c':'t']]; if(st)segs.push([st,'s']);
-    past.push({ar:fixAr(c.s.pA[0]+sa),segs});
-  }
-  const PRE=c.s.pv==='u'?PREU:PREA;
-  for(let i=0;i<8;i++){
-    const [fa,ft]=PRE[i];
-    const segs=[[ft,'p'],[c.s.pr[1],c.s.markP?'c':'t']];
-    let sufAr='';
-    if(CSUF[i]){segs.push([CSUF[i][1],'s']);sufAr=CSUF[i][0];}
-    pres.push({ar:fixAr(fa+c.s.pr[0]+sufAr),segs});
-  }
-  return {past,pres,kind:c.kind,cite:{pastAr:past[3].ar,pastTr:joinSegs(past[3].segs),presAr:pres[3].ar,presTr:joinSegs(pres[3].segs)}};
-}
-
-function getConj(entry){
-  const [root,f,opt,gloss]=entry;
-  if(CUSTOM[root]){
-    const c=CUSTOM[root];
-    if(c.s){const r=conjCustomS(c);r.gloss=gloss;return r;}
-    return {past:c.past,pres:c.pres,kind:c.kind,gloss,
-      cite:{pastAr:c.past[3].ar,pastTr:joinSegs(c.past[3].segs),presAr:c.pres[3].ar,presTr:joinSegs(c.pres[3].segs)}};
-  }
-  const r=conjugate(root,f,opt); r.gloss=gloss; return r;
-}
-
-if(typeof module!=='undefined')module.exports={getConj,conjugate};
-const VERBS=[
-["كون",1,"","be"],
-["قول",1,"","say"],
-["فعل",1,"a","do"],
-["ذهب",1,"a","go"],
-["جاء",0,"","come"],
-["رأى",0,"","see"],
-["أخذ",1,"u","take"],
-["جعل",1,"a","make, cause"],
-["علم",1,"ia","know"],
-["رود",4,"","want"],
-["عرف",1,"i","know, recognize"],
-["وجد",1,"i","find"],
-["قدر",1,"i","be able"],
-["صبح",4,"","become"],
-["ظلل",1,"a","remain, keep on"],
-["بقي",1,"A","stay, remain"],
-["صير",1,"","become"],
-["عمل",1,"ia","work, do"],
-["كتب",1,"u","write"],
-["قرأ",1,"a","read"],
-["سمع",1,"ia","hear"],
-["شهد",3,"","watch"],
-["نظر",1,"u","look"],
-["كلم",5,"","speak, talk"],
-["حدث",5,"","talk, speak"],
-["فهم",1,"ia","understand"],
-["فكر",2,"","think"],
-["عقد",8,"","believe"],
-["ظنن",1,"u","think, suppose"],
-["ذكر",5,"","remember"],
-["نسي",1,"A","forget"],
-["حبب",4,"","love, like"],
-["كره",1,"ia","hate"],
-["شعر",1,"u","feel"],
-["بدأ",1,"a","begin"],
-["نهي",8,"","finish, end"],
-["مرر",10,"","continue"],
-["وقف",5,"","stop (intr.)"],
-["كمل",4,"","complete"],
-["حول",3,"","try"],
-["طوع",10,"","be able, can"],
-["حوج",8,"","need"],
-["وجب",1,"i","be necessary, must"],
-["طلب",1,"u","request, ask for"],
-["عطي",4,"","give"],
-["وضع",1,"a","put, place"],
-["ترك",1,"u","leave"],
-["دخل",1,"u","enter"],
-["خرج",1,"u","exit, go out"],
-["رجع",1,"i","return"],
-["عود",1,"","return, go back"],
-["وصل",1,"i","arrive"],
-["غدر",3,"","leave, depart"],
-["سفر",3,"","travel"],
-["مشي",1,"","walk"],
-["جري",1,"","run, flow"],
-["ركض",1,"u","run"],
-["وقف",1,"i","stand, stop"],
-["جلس",1,"i","sit"],
-["قعد",1,"u","sit down"],
-["نوم",1,"A","sleep"],
-["يقظ",10,"","wake up"],
-["أكل",1,"u","eat"],
-["شرب",1,"ia","drink"],
-["طبخ",1,"u","cook"],
-["غسل",1,"i","wash"],
-["لبس",1,"ia","wear, put on"],
-["سكن",1,"u","live, reside"],
-["عيش",1,"","live"],
-["موت",1,"","die"],
-["ولد",1,"i","give birth"],
-["كبر",1,"ia","grow up"],
-["نشأ",1,"a","grow up, arise"],
-["زوج",5,"","get married"],
-["حمل",1,"i","carry"],
-["ربي",2,"","raise (children)"],
-["سعد",3,"","help"],
-["خدم",1,"i","serve"],
-["حرم",8,"","respect"],
-["قبل",3,"","meet"],
-["لقي",8,"","meet"],
-["زور",1,"","visit"],
-["دعو",1,"","invite, call"],
-["رحب",2,"","welcome"],
-["قبل",10,"","receive, welcome"],
-["ودع",2,"","bid farewell"],
-["شكر",1,"u","thank"],
-["عذر",8,"","apologize"],
-["سمح",3,"","forgive"],
-["غفر",1,"i","forgive"],
-["وعد",1,"i","promise"],
-["كذب",1,"i","lie"],
-["صدق",2,"","believe (someone)"],
-["خبر",4,"","tell, inform"],
-["علن",4,"","announce"],
-["سأل",1,"a","ask"],
-["جوب",4,"","answer"],
-["ردد",1,"u","reply, return"],
-["شرح",1,"a","explain"],
-["وصف",1,"i","describe"],
-["نقش",3,"","discuss"],
-["جدل",3,"","argue, debate"],
-["قرح",8,"","suggest"],
-["وفق",3,"","agree (with)"],
-["اتفق",0,"","agree"],
-["رفض",1,"u","refuse"],
-["خلف",8,"","differ, disagree"],
-["قرر",2,"","decide"],
-["خير",8,"","choose"],
-["فضل",2,"","prefer"],
-["قبل",1,"ia","accept"],
-["منع",1,"a","prevent, forbid"],
-["سمح",1,"a","allow"],
-["أمر",1,"u","order, command"],
-["نصح",1,"a","advise"],
-["حذر",2,"","warn"],
-["هدد",2,"","threaten"],
-["نكر",4,"","deny"],
-["عرف",8,"","confess, admit"],
-["أكد",2,"","confirm, stress"],
-["شكك",1,"u","doubt"],
-["أكد",5,"","make sure"],
-["وقع",5,"","expect"],
-["خيل",5,"","imagine"],
-["صور",5,"","imagine, picture"],
-["حلم",1,"u","dream"],
-["أمل",1,"u","hope"],
-["رجو",1,"","hope, request"],
-["مني",5,"","wish"],
-["خطط",2,"","plan"],
-["قصد",1,"i","intend, mean"],
-["نوي",1,"","intend"],
-["صمم",2,"","design; be determined"],
-["نظم",2,"","organize"],
-["رتب",2,"","arrange, tidy"],
-["جهز",2,"","prepare, equip"],
-["حضر",1,"u","attend, be present"],
-["حضر",2,"","prepare"],
-["عدد",10,"","get ready"],
-["بدل",2,"","change, replace"],
-["غير",2,"","change (something)"],
-["غير",5,"","change (intr.)"],
-["طور",5,"","develop (intr.)"],
-["طور",2,"","develop (something)"],
-["حسن",2,"","improve (something)"],
-["حسن",5,"","improve (intr.)"],
-["زيد",1,"","increase, grow"],
-["نقص",1,"u","decrease"],
-["رفع",1,"a","raise, lift"],
-["خفض",1,"i","lower"],
-["رفع",8,"","rise, go up"],
-["خفض",7,"","drop, fall"],
-["فتح",1,"a","open"],
-["غلق",4,"","close"],
-["قفل",1,"i","lock"],
-["كسر",1,"i","break"],
-["كسر",7,"","break (intr.)"],
-["صلح",4,"","fix, repair"],
-["بني",1,"","build"],
-["هدم",1,"i","demolish"],
-["أسس",2,"","found, establish"],
-["نشأ",4,"","establish, create"],
-["صنع",1,"a","make, manufacture"],
-["نتج",4,"","produce"],
-["طبع",1,"a","print"],
-["نشر",1,"u","publish, spread"],
-["وزع",2,"","distribute"],
-["جمع",1,"a","gather, collect"],
-["فرق",2,"","separate, divide"],
-["قسم",2,"","divide, share"],
-["خلط",1,"i","mix"],
-["ربط",1,"i","tie, connect"],
-["حلل",1,"u","solve; untie"],
-["فكك",1,"u","undo, take apart"],
-["قطع",1,"a","cut"],
-["قصص",1,"u","cut; tell (a story)"],
-["لصق",1,"ia","stick"],
-["علق",2,"","hang; comment"],
-["ثبت",2,"","fix in place"],
-["ركب",2,"","install, assemble"],
-["ركب",1,"ia","ride"],
-["نزل",1,"i","descend, get off"],
-["صعد",1,"ia","climb, go up"],
-["هبط",1,"i","land, descend"],
-["طير",1,"","fly"],
-["سبح",1,"a","swim"],
-["قفز",1,"i","jump"],
-["سقط",1,"u","fall"],
-["وقع",1,"a","fall; happen"],
-["رمي",1,"","throw"],
-["مسك",4,"","grab, hold"],
-["سحب",1,"a","pull, withdraw"],
-["جرر",1,"u","drag, pull"],
-["دفع",1,"a","push; pay"],
-["حرك",2,"","move (something)"],
-["حرك",5,"","move (intr.)"],
-["نقل",1,"u","transport, transfer"],
-["نقل",8,"","move, relocate"],
-["حضر",4,"","bring"],
-["رسل",4,"","send"],
-["سلم",2,"","hand over; greet"],
-["سلم",8,"","receive (mail, goods)"],
-["وزن",1,"i","weigh"],
-["قيس",1,"","measure"],
-["عدد",1,"u","count"],
-["حسب",1,"u","calculate, consider"],
-["ضرب",1,"i","hit; multiply"],
-["سوي",3,"","equal"],
-["قيم",2,"","evaluate"],
-["كلف",2,"","cost; assign"],
-["شري",8,"","buy"],
-["بيع",1,"","sell"],
-["أجر",2,"","rent out"],
-["أجر",10,"","rent"],
-["كسب",1,"i","earn, gain"],
-["ربح",1,"ia","profit, win"],
-["خسر",1,"ia","lose"],
-["نفق",4,"","spend (money)"],
-["وفر",2,"","save; provide"],
-["ثمر",10,"","invest"],
-["قرض",8,"","borrow"],
-["قرض",4,"","lend"],
-["سدد",2,"","pay back"],
-["صدر",2,"","export"],
-["ورد",10,"","import"],
-["ملك",1,"i","own, possess"],
-["ملك",8,"","own, possess"],
-["قبض",1,"i","receive (pay); grasp"],
-["صرف",1,"i","spend; exchange"],
-["حول",2,"","transfer, convert"],
-["مول",2,"","fund, finance"],
-["سرع",4,"","hurry"],
-["أخر",5,"","be late"],
-["أخر",2,"","delay, postpone"],
-["نظر",8,"","wait"],
-["غرق",10,"","take (time)"],
-["بدو",1,"","seem, appear"],
-["ظهر",1,"a","appear"],
-["خفي",8,"","disappear"],
-["غيب",1,"","be absent"],
-["شرق",4,"","rise (sun)"],
-["غرب",1,"u","set (sun)"],
-["مطر",4,"","rain"],
-["هبب",1,"u","blow (wind)"],
-["نمو",1,"","grow"],
-["زرع",1,"a","plant"],
-["حصد",1,"u","harvest"],
-["سقي",1,"","water, irrigate"],
-["قطف",1,"i","pick (fruit)"],
-["نضج",1,"ia","ripen, mature"],
-["فسد",1,"u","spoil, go bad"],
-["قلي",1,"","fry"],
-["سلق",1,"u","boil (food)"],
-["شوي",1,"","grill"],
-["خبز",1,"i","bake bread"],
-["عجن",1,"i","knead"],
-["ذوق",1,"","taste"],
-["ذوق",5,"","savor, taste"],
-["بلع",1,"a","swallow"],
-["مضغ",1,"a","chew"],
-["هضم",1,"i","digest"],
-["جوع",1,"","be hungry"],
-["عطش",1,"ia","be thirsty"],
-["شبع",1,"ia","be full (of food)"],
-["نول",6,"","have (a meal), take"],
-["قدم",2,"","offer, serve, present"],
-["حجز",1,"i","reserve, book"],
-["غني",2,"","sing"],
-["رقص",1,"u","dance"],
-["عزف",1,"i","play (an instrument)"],
-["سمع",8,"","listen"],
-["لعب",1,"ia","play"],
-["فوز",1,"","win"],
-["سجل",2,"","record; score"],
-["درب",5,"","train, practice"],
-["مرن",5,"","exercise, practice"],
-["نفس",6,"","compete"],
-["شرك",3,"","participate, share"],
-["عون",6,"","cooperate"],
-["حفل",8,"","celebrate"],
-["هنأ",2,"","congratulate"],
-["هدي",4,"","give a gift"],
-["متع",10,"","enjoy"],
-["ضحك",1,"ia","laugh"],
-["بسم",8,"","smile"],
-["بكي",1,"","cry"],
-["حزن",1,"ia","be sad"],
-["فرح",1,"ia","be happy"],
-["غضب",1,"ia","be angry"],
-["خجل",1,"ia","be shy, embarrassed"],
-["ندم",1,"ia","regret"],
-["قلق",1,"ia","worry"],
-["خوف",1,"A","fear, be afraid"],
-["شوق",8,"","miss, long for"],
-["روح",8,"","rest, relax"],
-["رخو",10,"","relax"],
-["ملل",1,"a","be bored"],
-["تعب",1,"ia","get tired"],
-["مرض",1,"ia","get sick"],
-["شفي",1,"","heal, cure"],
-["نفس",5,"","breathe"],
-["سعل",1,"u","cough"],
-["عطس",1,"i","sneeze"],
-["نزف",1,"i","bleed"],
-["جرح",1,"a","wound, injure"],
-["علج",3,"","treat (medically)"],
-["فحص",1,"a","examine"],
-["دوي",3,"","treat, medicate"],
-["حمم",10,"","bathe, shower"],
-["حلق",1,"i","shave"],
-["درس",1,"u","study"],
-["درس",2,"","teach"],
-["علم",2,"","teach"],
-["علم",5,"","learn"],
-["حفظ",1,"ia","memorize, keep"],
-["رجع",3,"","review"],
-["محن",8,"","test, examine"],
-["نجح",1,"a","succeed, pass"],
-["رسب",1,"u","fail (an exam)"],
-["فشل",1,"ia","fail"],
-["خرج",5,"","graduate"],
-["لحق",8,"","join, enroll"],
-["لخص",2,"","summarize"],
-["فسر",2,"","explain, interpret"],
-["عبر",2,"","express"],
-["عبر",1,"u","cross"],
-["بحث",1,"a","search, research"],
-["كشف",8,"","discover"],
-["خرع",8,"","invent"],
-["جرب",2,"","try, test"],
-["حلل",2,"","analyze"],
-["قرن",3,"","compare"],
-["نتج",10,"","conclude"],
-["لحظ",3,"","notice, observe"],
-["ركز",2,"","focus, concentrate"],
-["نبه",8,"","pay attention"],
-["همم",8,"","care about, be interested"],
-["همل",4,"","neglect"],
-["نسخ",1,"a","copy"],
-["حذف",1,"i","delete"],
-["ضيف",4,"","add"],
-["عدل",2,"","adjust, modify"],
-["صحح",2,"","correct"],
-["حمل",2,"","load; download"],
-["نزل",2,"","download"],
-["شغل",2,"","operate, turn on"],
-["طفأ",4,"","turn off, extinguish"],
-["شعل",4,"","light, ignite"],
-["وصل",2,"","connect; charge"],
-["اتصل",0,"","call, contact"],
-["خدم",10,"","use"],
-["عمل",10,"","use"],
-["طبق",2,"","apply"],
-["نفذ",2,"","carry out, implement"],
-["وظف",2,"","employ, hire"],
-["عين",2,"","appoint"],
-["قيل",10,"","resign"],
-["قعد",6,"","retire"],
-["دور",4,"","manage, run"],
-["نظف",2,"","clean"],
-["كنس",1,"u","sweep"],
-["مسح",1,"a","wipe; scan"],
-["كوي",1,"","iron"],
-["خيط",1,"","sew"],
-["حدث",1,"u","happen"],
-["حدد",2,"","specify, define"],
-["وضح",2,"","clarify"],
-["بين",2,"","show, clarify"],
-["شور",4,"","point, indicate"],
-["دلل",1,"u","indicate, point to"],
-["عني",1,"","mean"],
-["قود",1,"","lead; drive"],
-["سوق",1,"","drive"],
-["عطف",7,"","turn (a corner)"],
-["جوز",6,"","exceed, overtake"],
-["جهل",6,"","ignore"],
-["وجه",3,"","face, confront"],
-["قوم",3,"","resist"],
-["دفع",3,"","defend"],
-["هجم",3,"","attack"],
-["حرب",3,"","fight (a war)"],
-["قتل",3,"","fight, combat"],
-["نصر",8,"","triumph, win"],
-["هزم",1,"i","defeat"],
-["سلم",10,"","surrender"],
-["حمي",1,"","protect"],
-["نقذ",4,"","rescue, save"],
-["خطف",1,"a","kidnap, snatch"],
-["سرق",1,"i","steal"],
-["خدع",1,"a","deceive, trick"],
-["كشف",1,"i","reveal, uncover"],
-["حقق",2,"","achieve; investigate"],
-["اتخذ",0,"","adopt, take (a decision)"],
-["عقل",8,"","arrest"],
-["سجن",1,"u","imprison"],
-["حبس",1,"i","detain, confine"],
-["طلق",4,"","launch, release"],
-["حكم",1,"u","rule, judge"],
-["عقب",3,"","punish"],
-["قتل",1,"u","kill"],
-["برد",1,"u","become cold"],
-["سخن",2,"","heat up"],
-["جفف",1,"i","become dry"],
-["جفف",2,"","dry (something)"],
-["ذوب",1,"","melt"],
-["جمد",1,"u","freeze"],
-["جمد",5,"","freeze (intr.)"],
-["بخر",5,"","evaporate"],
-["غلي",1,"","boil"],
-["ندو",3,"","call out to"],
-["صرخ",1,"u","scream, shout"],
-["همس",1,"i","whisper"],
-["صيح",1,"","shout, cry out"],
-["نطق",1,"i","pronounce"],
-["لفظ",1,"i","utter, pronounce"],
-["تلو",1,"","recite"],
-["خطب",1,"u","give a speech"],
-["لقي",4,"","deliver (speech); throw"],
-["حضر",3,"","lecture"],
-["دون",2,"","write down, note"],
-["حرر",2,"","edit; liberate"],
-["رسل",3,"","correspond with"],
-["بعث",1,"a","send, dispatch"],
-["صلي",2,"","pray"],
-["صوم",1,"","fast"],
-["حجج",1,"u","make the pilgrimage"],
-["أمن",4,"","believe (in)"],
-["عبد",1,"u","worship"],
-["سجد",1,"u","prostrate"],
-["ركع",1,"a","bow"],
-["برك",3,"","bless"],
-["شجع",2,"","encourage"],
-["قنع",4,"","convince"],
-["قنع",8,"","be convinced"],
-["عجب",4,"","please, impress"],
-["غرب",10,"","find strange"],
-["دهش",7,"","be amazed"],
-["فجأ",6,"","be surprised"],
-["غلل",10,"","exploit"],
-["حقق",10,"","deserve"],
-["علم",10,"","inquire"],
-["فسر",10,"","inquire, ask about"],
-["شور",10,"","consult"],
-["دعو",10,"","summon"],
-["غني",10,"","do without"],
-["هلك",10,"","consume"],
-["قرر",10,"","settle down"],
-["نكر",10,"","condemn"],
-["حرق",1,"i","burn"],
-["حرق",4,"","burn (something)"],
-["غرق",1,"ia","drown, sink"],
-["غطس",1,"i","dive"],
-["عوم",1,"","float, swim"],
-["حفر",1,"i","dig"],
-["دفن",1,"i","bury"],
-["لمس",1,"i","touch"],
-["ضغط",1,"a","press, pressure"],
-["دقق",1,"u","knock; be precise"],
-["طرق",1,"u","knock"],
-["فرك",1,"u","rub"],
-["عصر",1,"i","squeeze, juice"],
-["سكب",1,"u","pour"],
-["صبب",1,"u","pour"],
-["ملأ",1,"a","fill"],
-["فرغ",2,"","empty"],
-["رشش",1,"u","spray"],
-["نفخ",1,"u","blow, inflate"],
-["مصص",1,"u","suck"],
-["عضض",1,"a","bite"],
-["خدش",1,"i","scratch"],
-["قرص",1,"u","pinch"],
-["شدد",1,"u","pull tight, tighten"],
-["لوي",1,"","twist, bend"],
-["ثني",1,"","fold, bend"],
-["طوي",1,"","fold"],
-["بسط",1,"u","spread out"],
-["مدد",1,"u","extend, stretch"],
-["لفف",1,"u","wrap, roll"],
-["غطي",2,"","cover"],
-["فرش",1,"u","furnish; spread"],
-["زين",2,"","decorate"],
-["ذكر",2,"","remind"],
-["فهم",4,"","make understand"],
-["سلق",5,"","climb (a tree, wall)"],
-["زلق",7,"","slip, slide"],
-["زحف",1,"a","crawl"],
-["ركل",1,"u","kick"],
-["صدد",1,"u","block, repel"],
-["مرر",1,"u","pass, go by"],
-["مرر",2,"","pass (a ball); let pass"],
-["دوم",1,"","last, continue"],
-["أنف",10,"","resume"],
-["أجل",2,"","postpone"],
-["دور",1,"","turn, revolve"],
-["اتهم",0,"","accuse"],
-["اتجه",0,"","head toward, go toward"],
-["ذكر",1,"u","mention"],
-["شغل",8,"","work, be employed"],
-["جهد",8,"","work hard, strive"],
-["نخب",8,"","elect"],
-["جمع",8,"","meet, assemble"],
-["قرب",8,"","approach"],
-["عمد",8,"","rely on"],
-["نشر",8,"","spread (intr.)"],
-["فقد",8,"","miss (someone)"],
-["فقد",1,"i","lose (something)"],
-["بدأ",8,"","start, commence"],
-["عود",8,"","be accustomed to"],
-["ردي",8,"","wear, put on"],
-["خلع",1,"a","take off (clothes)"],
-["وسع",1,"a","be wide enough for"],
-["ضحك",4,"","make laugh"],
-["بكي",4,"","make cry"],
-["نجز",4,"","accomplish"],
-["خطأ",4,"","make a mistake"],
-["صدر",4,"","issue, publish"],
-["لغي",4,"","cancel"],
-["مضي",4,"","spend (time); sign"],
-["مكن",4,"","be possible; enable"],
-["زعج",4,"","annoy, disturb"],
-["قلع",4,"","take off (plane)"],
-["دخل",4,"","insert, admit"],
-["خرج",4,"","take out, expel"],
-["ظهر",4,"","show, display"],
-["خفي",4,"","hide (something)"],
-["زول",4,"","remove"],
-["محو",1,"","erase"],
-["زهر",4,"","bloom"],
-["ثور",4,"","stir up, provoke"],
-["فيد",4,"","benefit, inform"],
-["فيد",10,"","benefit from"],
-["طوع",4,"","obey"],
-["عيد",4,"","repeat; return (something)"],
-["قوم",4,"","hold (an event); reside"],
-["قوم",1,"","rise, stand up"],
-["نهض",1,"a","get up, rise"],
-["رقد",1,"u","lie down, sleep"],
-["لقي",10,"","lie down"],
-["جنب",5,"","avoid"],
-["قدم",5,"","advance, apply"],
-["دخل",5,"","intervene"],
-["حمل",5,"","bear, endure"],
-["خلص",5,"","get rid of"],
-["صرف",5,"","behave, act"],
-["عرف",5,"","get to know"],
-["لقي",5,"","receive (news, training)"],
-["سبق",1,"i","precede, be earlier"],
-["لحق",1,"ia","catch up with"],
-["تبع",1,"ia","follow"],
-["تبع",3,"","follow, continue"],
-["طرد",1,"u","expel, chase away"],
-["طرد",3,"","chase, pursue"],
-["هرب",1,"u","escape, flee"],
-["سبح",2,"","praise"],
-["حير",2,"","confuse"],
-["أذن",2,"","call to prayer"],
-["أثر",2,"","influence, affect"],
-["نصر",1,"u","support, aid"],
-["عزم",1,"i","resolve, be determined"],
-["نجو",1,"","survive, escape"],
-["قطع",7,"","be cut off, stop"],
-["فجر",7,"","explode"],
-["سحب",7,"","withdraw (intr.)"],
-["فتح",7,"","open (intr.)"],
-["فصل",7,"","separate, detach (intr.)"],
-["شرك",8,"","subscribe, join"],
-["حوي",8,"","contain"],
-["ضمن",5,"","include"],
-["ضمن",1,"a","guarantee"],
-["شمل",1,"a","include, comprise"],
-["حوط",4,"","surround; inform"],
-["وسع",2,"","widen, expand"],
-["قلص",2,"","reduce, shrink"],
-["خصص",2,"","allocate, dedicate"],
-["فوض",2,"","delegate, authorize"],
-["رشح",2,"","nominate"],
-["صحح",1,"i","be correct, be true"],
-["غلط",1,"ia","make a mistake"],
-["حسد",1,"u","envy"],
-["فخر",8,"","be proud of"],
-["ثقف",2,"","educate"],
-["درك",4,"","realize, grasp"],
-["حير",5,"","be confused"],
-["ردد",5,"","hesitate"],
-["جرأ",5,"","dare"],
-["خطر",1,"u","occur (to one's mind)"],
-["بدو",4,"","express, show"],
-["جري",4,"","conduct, carry out"],
-["لزم",1,"ia","be necessary"],
-["لزم",8,"","commit to"],
-["كفي",1,"","be enough"],
-["كفل",1,"u","sponsor, guarantee"],
-["خضع",1,"a","submit, undergo"],
-["رغب",1,"ia","desire, wish"],
-["رغم",4,"","force, compel"],
-["جبر",4,"","force, oblige"],
-["حرص",1,"ii","be keen on"],
-["عشق",1,"ia","adore, love passionately"],
-["غير",1,"A","be jealous of"],
-["وثق",1,"ii","trust"],
-["أمن",1,"ia","be safe"],
-["خون",1,"","betray"],
-["خلص",4,"","be loyal, devoted"],
-["ضحي",2,"","sacrifice"],
-["كرم",4,"","honor"],
-["هين",4,"","insult"],
-["حقر",8,"","despise"],
-["سخر",1,"ia","mock, ridicule"],
-["مزح",1,"a","joke"],
-["سلي",2,"","entertain, amuse"],
-["روي",1,"","narrate, tell"],
-["حكي",1,"","tell, narrate"],
-["زعم",1,"u","claim, allege"],
-["نفي",1,"","deny; exile"],
-["برر",2,"","justify"],
-["فند",2,"","refute"],
-["ثبت",4,"","prove"],
-["غمض",1,"u","be obscure; close (eyes)"],
-["حجب",1,"u","block, veil"],
-["ستر",1,"u","conceal, cover"],
-["فضح",1,"a","expose, disgrace"],
-["شهر",4,"","make famous; declare"],
-["علو",1,"","rise, be high"],
-["هوي",1,"","fall; love"],
-["غوص",1,"","dive, plunge"],
-["طفو",1,"","float"],
-["رسو",1,"","anchor, dock"],
-["بحر",4,"","set sail"],
-["وصل",3,"","continue"],
-["كرر",2,"","repeat"],
-["عزل",1,"i","isolate, dismiss"],
-["فصل",1,"i","separate; dismiss"],
-["وحد",2,"","unify"],
-["دمج",1,"u","merge, integrate"],
-["ضمم",1,"u","annex, embrace"],
-["خزن",1,"u","store"],
-["خزن",2,"","store"],
-["حفظ",8,"","keep, retain"],
-["نسي",4,"","make forget"],
-["سرد",1,"u","recount, list"],
-["عدد",2,"","enumerate, list"],
-["حصي",4,"","count, enumerate"],
-["صنف",2,"","classify"],
-["شفر",2,"","encrypt"],
-["خمن",2,"","guess"],
-["جزم",1,"i","assert definitively"]
-];
-const ROMAN={0:"irregular",1:"Form I",2:"Form II",3:"Form III",4:"Form IV",5:"Form V",6:"Form VI",7:"Form VII",8:"Form VIII",10:"Form X"};
-const PRONOUNS=["أنا ana — I","أنتَ anta — you (m)","أنتِ anti — you (f)","هو huwa — he","هي hiya — she","نحن naḥnu — we","أنتم antum — you (pl)","هم hum — they"];
+const T={'ب':'b','ت':'t','ث':'th','ج':'j','ح':'ḥ','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'ṣ','ض':'ḍ','ط':'ṭ','ظ':'ẓ','ع':'ʿ','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ء':'ʾ','أ':'ʾ','آ':'ā','إ':'ʾ','ؤ':'ʾ','ى':'ā','َ':'a','ُ':'u','ِ':'i','ّ':''};
+const PRONOUNS=["أنا ana — I","إنتا inta — you (m)","إنتي inti — you (f)","هوّي huwwe — he","هيّي hiyye — she","نحنا niḥna — we","إنتو intu — you (pl)","هنّه hénne — they"];
 const cache=new Map();
-function conjOf(i){if(!cache.has(i))cache.set(i,getConj(VERBS[i]));return cache.get(i);}
-function fold(s){const m={'ā':'a','ī':'i','ū':'u','ḥ':'h','ṭ':'t','ṣ':'s','ḍ':'d','ẓ':'z','ʿ':'','ʾ':''};return s.toLowerCase().replace(/[āīūḥṭṣḍẓʿʾ]/g,c=>m[c]);}
-const INDEX=VERBS.map((v,i)=>{const c=conjOf(i);return{i,ar:c.cite.pastAr+' '+c.cite.presAr+' '+v[0],tr:fold(c.cite.pastTr+' '+c.cite.presTr),gl:v[3].toLowerCase()};});
+
+function ar2tr(w){
+  let s='';
+  for(const c of w){s+=(T[c]||c);}
+  return s;
+}
+
+function makeStems(entry){
+  const [past3,pres3,type,gloss]=entry;
+  
+  if(type==='irr'){
+    const irr=IRREGULAR[past3];
+    if(!irr) return null;
+    return {
+      past: irr.past.map(a=>({ar:a,tr:ar2tr(a),segs:[[ar2tr(a),'c']]}),
+      pres: irr.pres.map(a=>({ar:a,tr:ar2tr(a),segs:[]}),
+      kind: irr.kind,
+      gloss
+    };
+  }
+
+  // Parse hollow: "راح|رح" -> 3ms=راح, short=رح
+  let pastStem3=past3, pastStemShort=past3;
+  if(type==='hollow'){
+    const parts=past3.split('|');
+    pastStem3=parts[0];
+    pastStemShort=parts[1]||parts[0];
+  }
+
+  // Present stem: remove byi/bya prefix
+  let presStem='';
+  if(pres3.startsWith('byi')) presStem=pres3.slice(3);
+  else if(pres3.startsWith('bya')) presStem=pres3.slice(3);
+  else presStem=pres3;
+
+  const past=[], pres=[];
+  const pastTr3=ar2tr(pastStem3);
+  const pastTrShort=ar2tr(pastStemShort);
+  const presTr=ar2tr(presStem);
+
+  if(type==='reg'||type==='doubled'){
+    past.push({ar:pastStemShort+'ت',  tr:pastTrShort+'t',  segs:[[pastTrShort,'t'],['t','s']]});
+    past.push({ar:pastStemShort+'ت',  tr:pastTrShort+'t',  segs:[[pastTrShort,'t'],['t','s']]});
+    past.push({ar:pastStemShort+'تي', tr:pastTrShort+'ti', segs:[[pastTrShort,'t'],['ti','s']]});
+    past.push({ar:pastStem3,          tr:pastTr3,          segs:[[pastTr3,'t']]});
+    past.push({ar:pastStem3+'ت',      tr:pastTr3+'t',      segs:[[pastTr3,'t'],['t','s']]});
+    past.push({ar:pastStemShort+'نا', tr:pastTrShort+'na', segs:[[pastTrShort,'t'],['na','s']]});
+    past.push({ar:pastStemShort+'تو', tr:pastTrShort+'tu', segs:[[pastTrShort,'t'],['tu','s']]});
+    past.push({ar:pastStem3+'و',      tr:pastTr3+'u',      segs:[[pastTr3,'t'],['u','s']]});
+  } else if(type==='hollow'){
+    past.push({ar:pastStemShort+'ت',  tr:pastTrShort+'t',  segs:[[pastTrShort,'c'],['t','s']]});
+    past.push({ar:pastStemShort+'ت',  tr:pastTrShort+'t',  segs:[[pastTrShort,'c'],['t','s']]});
+    past.push({ar:pastStemShort+'تي', tr:pastTrShort+'ti', segs:[[pastTrShort,'c'],['ti','s']]});
+    past.push({ar:pastStem3,          tr:pastTr3,          segs:[[pastTr3,'t']]});
+    past.push({ar:pastStem3+'ت',      tr:pastTr3+'t',      segs:[[pastTr3,'t'],['t','s']]});
+    past.push({ar:pastStemShort+'نا', tr:pastTrShort+'na', segs:[[pastTrShort,'c'],['na','s']]});
+    past.push({ar:pastStemShort+'تو', tr:pastTrShort+'tu', segs:[[pastTrShort,'c'],['tu','s']]});
+    past.push({ar:pastStem3+'و',      tr:pastTr3+'u',      segs:[[pastTr3,'t'],['u','s']]});
+  } else if(type==='def'){
+    const base=pastStem3.replace(/ى$/,'').replace(/ا$/,'').replace(/ي$/,'');
+    const baseTr=ar2tr(base);
+    past.push({ar:base+'يت',   tr:baseTr+'īt',   segs:[[baseTr,'c'],['īt','s']]});
+    past.push({ar:base+'يت',   tr:baseTr+'īt',   segs:[[baseTr,'c'],['īt','s']]});
+    past.push({ar:base+'يتي',  tr:baseTr+'īti',  segs:[[baseTr,'c'],['īti','s']]});
+    past.push({ar:pastStem3,    tr:pastTr3,       segs:[[pastTr3,'t']]});
+    past.push({ar:base+'ت',     tr:baseTr+'t',    segs:[[baseTr,'c'],['t','s']]});
+    past.push({ar:base+'ينا',  tr:baseTr+'īna',  segs:[[baseTr,'c'],['īna','s']]});
+    past.push({ar:base+'يتو',  tr:baseTr+'ītu',  segs:[[baseTr,'c'],['ītu','s']]});
+    past.push({ar:base+'وا',   tr:baseTr+'u',    segs:[[baseTr,'c'],['u','s']]});
+  }
+
+  // Present tense
+  const pPref=['ب','بت','بت','بي','بت','من','بت','بي'];
+  const pPrefTr=['b','bt','bt','by','bt','mn','bt','by'];
+  const pSuf=['','','ي','','','','و','و'];
+  const pSufTr=['','','i','','','','u','u'];
+
+  for(let i=0;i<8;i++){
+    const word=pPref[i]+presStem+(pSuf[i]||'');
+    const segs=[[pPrefTr[i],'p'],[presTr,'t']];
+    if(pSuf[i]) segs.push([pSufTr[i],'s']);
+    pres.push({ar:word,tr:pPrefTr[i]+presTr+(pSufTr[i]||''),segs});
+  }
+
+  const kindMap={reg:'regular',hollow:'hollow',def:'defective',doubled:'doubled'};
+  return {past,pres,kind:kindMap[type]||type,gloss};
+}
+
+function getConj(i){
+  if(!cache.has(i)) cache.set(i,makeStems(VERBS[i]));
+  return cache.get(i);
+}
+
+function fold(s){
+  return s.toLowerCase().replace(/[āīūḥṭṣḍẓʿʾ]/g,c=>({ā:'a',ī:'i',ū:'u',ḥ:'h',ṭ:'t',ṣ:'s',ḍ:'d',ẓ:'z',ʿ:'',ʾ:''})[c]);
+}
+
+const INDEX=VERBS.map((v,i)=>{
+  const c=getConj(i);
+  if(!c) return null;
+  return {i,ar:v[0]+' '+v[1],tr:fold(v[0]+' '+v[1]),gl:v[3].toLowerCase()};
+}).filter(Boolean);
+
 let cur=0, tense=0, visible=INDEX.map(x=>x.i);
 const $=id=>document.getElementById(id);
-function segHtml(segs){return segs.filter(s=>s[0]).map((s,k)=>(k?'<span class="sp">·</span>':'')+'<span class="seg-'+s[1]+'">'+s[0]+'</span>').join('');}
+
+function segHtml(segs){
+  return segs.filter(s=>s[0]).map((s,k)=>(k?'<span class="sp">·</span>':'')+'<span class="seg-'+s[1]+'">'+s[0]+'</span>').join('');
+}
+
 function renderList(){
-  const L=$('list');L.innerHTML='';
+  const L=$('list'); L.innerHTML='';
   const frag=document.createDocumentFragment();
-  for(const i of visible){
-    const c=conjOf(i);
+  for(const idx of visible){
+    const c=getConj(idx);
+    if(!c) continue;
     const b=document.createElement('button');
-    b.className='vrow';b.setAttribute('role','option');
-    b.setAttribute('aria-current',i===cur?'true':'false');
-    b.innerHTML='<span class="ar">'+c.cite.pastAr+'</span><span class="tr">'+c.cite.pastTr+'</span><span class="gl">'+VERBS[i][3]+'</span>';
-    b.onclick=()=>{cur=i;renderDetail();renderList();};
+    b.className='vrow'; b.setAttribute('role','option');
+    b.setAttribute('aria-current',idx===cur?'true':'false');
+    b.innerHTML='<span class="ar">'+c.past[3].ar+'</span><span class="tr">'+c.past[3].tr+'</span><span class="gl">'+VERBS[idx][3]+'</span>';
+    b.onclick=()=>{cur=idx;renderDetail();renderList();};
     frag.appendChild(b);
   }
   L.appendChild(frag);
   $('count').textContent=visible.length+' of '+VERBS.length+' verbs';
 }
+
 function renderDetail(){
-  const v=VERBS[cur], c=conjOf(cur);
-  $('bigar').innerHTML=c.cite.pastAr+'<span class="pres">'+c.cite.presAr+'</span>';
-  $('meta').innerHTML='<b>'+c.cite.pastTr+'</b> / '+c.cite.presTr+' — '+v[3];
-  $('kind').textContent=ROMAN[v[1]]+' · '+c.kind;
+  const v=VERBS[cur], c=getConj(cur);
+  if(!c){$('bigar').textContent='';$('meta').textContent='';$('kind').textContent='Error';$('tbl').innerHTML='';return;}
+  $('bigar').innerHTML=c.past[3].ar+'<span class="pres">'+c.pres[3].ar+'</span>';
+  $('meta').innerHTML='<b>'+c.past[3].tr+'</b> / '+c.pres[3].tr+' — '+v[3];
+  $('kind').textContent=c.kind;
   document.querySelectorAll('#tabs button').forEach((b,j)=>b.setAttribute('aria-pressed',j===tense?'true':'false'));
-  let rows='<tr><th>Pronoun</th><th>Arabic</th><th>Built from</th></tr>';
+  let rows='<tr><th>Pronoun</th><th>Arabic</th><th>Transliteration</th><th>Built from</th></tr>';
   for(let r=0;r<8;r++){
-    let ar,segs;
-    if(tense===0){ar=c.past[r].ar;segs=c.past[r].segs;}
-    else if(tense===1){ar=c.pres[r].ar;segs=c.pres[r].segs;}
-    else{ar='س'+c.pres[r].ar;segs=[['sa','p']].concat(c.pres[r].segs);}
-    rows+='<tr><td class="pn">'+PRONOUNS[r]+'</td><td class="aw ar">'+ar+'</td><td class="bf">'+segHtml(segs)+'</td></tr>';
+    let ar,tr,segs;
+    if(tense===0){ar=c.past[r].ar;tr=c.past[r].tr;segs=c.past[r].segs;}
+    else if(tense===1){ar=c.pres[r].ar;tr=c.pres[r].tr;segs=c.pres[r].segs;}
+    else{ar='رح '+c.pres[r].ar;tr='raḥ '+c.pres[r].tr;segs=[['raḥ','p']].concat(c.pres[r].segs);}
+    rows+='<tr><td class="pn">'+PRONOUNS[r]+'</td><td class="aw ar">'+ar+'</td><td class="bf">'+tr+'</td><td class="bf">'+segHtml(segs)+'</td></tr>';
   }
   $('tbl').innerHTML=rows;
 }
-["Past","Present","Future = sa- + present"].forEach((t,j)=>{
-  const b=document.createElement('button');b.textContent=t;
+
+["Past","Present","Future = raḥ + present"].forEach((t,j)=>{
+  const b=document.createElement('button'); b.textContent=t;
   b.onclick=()=>{tense=j;renderDetail();};
   $('tabs').appendChild(b);
 });
+
 const rnd=document.createElement('button');
 rnd.textContent='🎲 Random verb';
 rnd.style.marginInlineStart='auto';
 rnd.onclick=()=>{
   const pool=visible.length?visible:INDEX.map(x=>x.i);
   let pick=pool[Math.floor(Math.random()*pool.length)];
-  if(pool.length>1)while(pick===cur)pick=pool[Math.floor(Math.random()*pool.length)];
-  cur=pick;renderDetail();renderList();
-  const row=document.querySelector('.vrow[aria-current="true"]'),list=$('list');
+  if(pool.length>1) while(pick===cur) pick=pool[Math.floor(Math.random()*pool.length)];
+  cur=pick; renderDetail(); renderList();
+  const row=document.querySelector('.vrow[aria-current="true"]'), list=$('list');
   if(row){
-    const r=row.getBoundingClientRect(),l=list.getBoundingClientRect();
-    if(r.top<l.top)list.scrollTop-=(l.top-r.top);
-    else if(r.bottom>l.bottom)list.scrollTop+=(r.bottom-l.bottom);
+    const r=row.getBoundingClientRect(), l=list.getBoundingClientRect();
+    if(r.top<l.top) list.scrollTop-=(l.top-r.top);
+    else if(r.bottom>l.bottom) list.scrollTop+=(r.bottom-l.bottom);
   }
 };
 $('tabs').appendChild(rnd);
+
 $('q').addEventListener('input',e=>{
   const q=e.target.value.trim(), qf=fold(q);
   visible = q ? INDEX.filter(x=>x.gl.includes(qf)||x.tr.includes(qf)||x.ar.includes(q)).map(x=>x.i) : INDEX.map(x=>x.i);
   renderList();
 });
-renderList();renderDetail();
+
+renderList(); renderDetail();
+
 const ea=$('ethaddr');
 ea.addEventListener('click',async()=>{
   const addr='0x7598557A58F1F0972EE7b66214D546a3328065bE';
   try{await navigator.clipboard.writeText(addr);}
   catch(e){
-    const r=document.createRange();r.selectNodeContents(ea);
-    const s=getSelection();s.removeAllRanges();s.addRange(r);
-    document.execCommand('copy');s.removeAllRanges();
+    const r=document.createRange(); r.selectNodeContents(ea);
+    const s=getSelection(); s.removeAllRanges(); s.addRange(r);
+    document.execCommand('copy'); s.removeAllRanges();
   }
   ea.textContent='copied ✓';
   setTimeout(()=>{ea.textContent=addr;},1500);
