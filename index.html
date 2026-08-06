@@ -606,8 +606,8 @@ function makeStems(entry){
     const irr=IRREGULAR[past3];
     if(!irr) return null;
     return {
-      past: irr.past.map(a=>({ar:a,tr:ar2tr(a),segs:[[ar2tr(a),'c']]}))),
-      pres: irr.pres.map(a=>({ar:a,tr:ar2tr(a),segs:[]}))),
+      past: irr.past.map(a=>({ar:a,tr:ar2tr(a),segs:[[ar2tr(a),'c']]})),
+      pres: irr.pres.map(a=>({ar:a,tr:ar2tr(a),segs:[]})),
       kind: irr.kind,
       gloss
     };
