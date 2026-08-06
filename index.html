@@ -387,14 +387,14 @@ const VERBS=[
   ["كنس","byiknis","reg","sweep"],
   ["مسح","byimsiH","reg","wipe"],
   ["كوي","byikwii","def","iron"],
-  ["خيط","byikhuuT","hollow","sew"],
+  ["خاط|خيط","byikhuuT","hollow","sew"],
   ["حدّد","byiHaddid","reg","specify"],
   ["وضّح","byiwadDaH","reg","clarify"],
   ["بيّن","byibayyin","reg","show"],
   ["دلّ","byidull","doubled","indicate"],
   ["قاد","byiqaad","reg","lead, drive"],
   ["ساق","byisaaq","reg","drive"],
-  ["قوم","byiquum","hollow","rise, stand up"],
+  ["قام|قوم","byiquum","hollow","rise, stand up"],
   ["دافع","byidaafiʕ","reg","defend"],
   ["هاجم","byihaajim","reg","attack"],
   ["حارب","byiHaarib","reg","fight (war)"],
@@ -411,7 +411,7 @@ const VERBS=[
   ["أحرق","byiHraq","reg","burn"],
   ["غرق","byighraq","reg","drown"],
   ["غطس","byighTuS","reg","dive"],
-  ["عوم","byiʕuum","hollow","float, swim"],
+  ["عام|عوم","byiʕuum","hollow","float, swim"],
   ["حفر","byiHfur","reg","dig"],
   ["دفن","byidfin","reg","bury"],
   ["لمس","byilmas","reg","touch"],
@@ -448,7 +448,7 @@ const VERBS=[
   ["مرّ","byimur","reg","pass"],
   ["دام","byidaam","reg","last"],
   ["أجل","byiaajil","reg","postpone"],
-  ["دار","byiduur","hollow","turn"],
+  ["دار|دور","byiduur","hollow","turn"],
   ["ذكر","byiʔkur","reg","mention"],
   ["شغل","byishghul","reg","work, be employed"],
   ["جهد","byijhad","reg","work hard"],
@@ -482,7 +482,7 @@ const VERBS=[
   ["فاد","byifaad","reg","benefit"],
   ["طاع","byiTaaʕ","reg","obey"],
   ["عاد","byiʕaad","reg","repeat"],
-  ["قام","byiquum","hollow","hold (event)"],
+  ["قام|قوم","byiquum","hollow","hold (event)"],
   ["نهض","byinhaD","reg","get up"],
   ["رقد","byirqad","reg","lie down"],
   ["جنّب","byijannib","reg","avoid"],
@@ -541,14 +541,14 @@ const VERBS=[
   ["أجبر","byiaajbar","reg","force"],
   ["حرص","byiHraS","reg","be keen"],
   ["عشق","byiʕshaq","reg","adore"],
-  ["غار","byighaar","hollow","be jealous"],
+  ["غار|غير","byighaar","hollow","be jealous"],
   ["وثق","byiwathiq","reg","trust"],
   ["أمن","byiaamin","reg","be safe"],
-  ["خان","byikhaan","hollow","betray"],
+  ["خان|خون","byikhaan","hollow","betray"],
   ["خلص","byikhlas","reg","be loyal"],
   ["ضحّى","byiDHa","reg","sacrifice"],
   ["كرّم","byikarrim","reg","honor"],
-  ["هان","byihaan","hollow","insult"],
+  ["هان|هون","byihaan","hollow","insult"],
   ["حقر","byiHqir","reg","despise"],
   ["سخر","byiskhar","reg","mock"],
   ["مزح","byimzah","reg","joke"],
@@ -566,7 +566,7 @@ const VERBS=[
   ["فضح","byifDaH","reg","expose"],
   ["علا","byiʕla","reg","rise"],
   ["هوى","byihwii","def","fall; love"],
-  ["غاص","byighuus","hollow","dive"],
+  ["غاص|غوص","byighuus","hollow","dive"],
   ["طفا","byiTfaa","reg","float"],
   ["رسا","byirsaa","reg","anchor"],
   ["بحر","byibHar","reg","set sail"],
@@ -588,6 +588,70 @@ const IRREGULAR={
   "قال":{past:["\u0642\u0644\u062a", "\u0642\u0644\u062a", "\u0642\u0644\u062a\u064a", "\u0642\u0627\u0644", "\u0642\u0627\u0644\u062a", "\u0642\u0644\u0646\u0627", "\u0642\u0644\u062a\u0648", "\u0642\u0627\u0644\u0648\u0627"],pres:["\u0628\u0642\u0648\u0644", "\u0628\u062a\u0642\u0648\u0644", "\u0628\u062a\u0642\u0648\u0644\u064a", "\u0628\u064a\u0642\u0648\u0644", "\u0628\u062a\u0642\u0648\u0644", "\u0645\u0646\u0642\u0648\u0644", "\u0628\u062a\u0642\u0648\u0644\u0648\u0627", "\u0628\u064a\u0642\u0648\u0644\u0648\u0627"],kind:"irregular (root q-w-l)"},
   "إجا":{past:["\u062c\u064a\u062a", "\u062c\u064a\u062a", "\u062c\u064a\u062a\u064a", "\u0625\u062c\u0627", "\u0625\u062c\u062a", "\u062c\u064a\u0646\u0627", "\u062c\u064a\u062a\u0648", "\u0625\u062c\u0648"],pres:["\u0628\u0627\u062c\u064a", "\u0628\u062a\u0627\u062c\u064a", "\u0628\u062a\u0627\u062c\u064a", "\u0628\u064a\u0627\u062c\u064a", "\u0628\u062a\u0627\u062c\u064a", "\u0645\u0646\u0627\u062c\u064a", "\u0628\u062a\u0627\u062c\u0648\u0627", "\u0628\u064a\u0627\u062c\u0648\u0627"],kind:"irregular (root j-y-ʾ)"},
 };
+const PRES_AR={
+  "راح|رح":"روح",
+  "شاف|شف":"شوف",
+  "صار|صر":"صير",
+  "نام|نم":"نوم",
+  "عاش|عيش":"عيش",
+  "مات|موت":"موت",
+  "زار|زور":"زور",
+  "زاد|زيد":"زيد",
+  "طار|طير":"طير",
+  "جوع|جيع":"جيع",
+  "خاف|خوف":"خاف",
+  "اشتاق|شوق":"شوق",
+  "رتاح|رتح":"رتاح",
+  "خاط|خيط":"خيط",
+  "دار|دور":"دور",
+  "قام|قوم":"قوم",
+  "انتصر":"نتصر",
+  "غار|غير":"غار",
+  "خان|خون":"خون",
+  "هان|هون":"هان",
+  "باع|بيع":"بيع",
+  "فاز|فوز":"فوز",
+  "عام|عوم":"عوم",
+  "غاص|غوص":"غوص",
+  "جاب|جيب":"جيب",
+  "لقى":"لاقي",
+  "بقى":"بقا",
+  "حكى":"حكي",
+  "عطى":"عطي",
+  "مشى":"مشي",
+  "دعا|دعو":"دعي",
+  "نوى":"نوي",
+  "بنى":"بني",
+  "رمى":"رمي",
+  "سقى":"سقي",
+  "غنّى":"غني",
+  "بكى":"بكي",
+  "اشترى":"شتري",
+  "ساوى":"ساوي",
+  "قيّم":"قيم",
+  "ملّأ":"ملي",
+  "طفى":"طفي",
+  "كوي":"كوي",
+  "لوى":"لوي",
+  "ثنى":"ثني",
+  "طوى":"طوي",
+  "غطّى":"غطي",
+  "شفى":"شفي",
+  "دوّى":"دوي",
+  "اختفى":"ختفي",
+  "ردّى":"ردي",
+  "لغى":"لغي",
+  "مضى":"مضي",
+  "بدّى":"بدي",
+  "سلّى":"سلي",
+  "روى":"روي",
+  "هوى":"هوي",
+  "حوى":"حوي",
+  "قلى":"قلي",
+  "شوى":"شوي",
+  "قال":null,
+  "إجا":null,
+};
 
 const T={'ب':'b','ت':'t','ث':'th','ج':'j','ح':'ḥ','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'ṣ','ض':'ḍ','ط':'ṭ','ظ':'ẓ','ع':'ʿ','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ء':'ʾ','أ':'ʾ','آ':'ā','إ':'ʾ','ؤ':'ʾ','ى':'ā','َ':'a','ُ':'u','ِ':'i','ّ':''};
 const PRONOUNS=["أنا ana — I","إنتا inta — you (m)","إنتي inti — you (f)","هوّي huwwe — he","هيّي hiyye — she","نحنا niḥna — we","إنتو intu — you (pl)","هنّه hénne — they"];
@@ -596,26 +660,6 @@ const cache=new Map();
 function ar2tr(w){
   let s='';
   for(const c of w){s+=(T[c]||c);}
-  return s;
-}
-
-const R=(()=>{
-  const m={};
-  for(const[k,v] of Object.entries(T)) m[v]=k;
-  // multi-char overrides (longer first)
-  const o={'th':'ث','kh':'خ','sh':'ش','gh':'غ','dh':'ذ','ḥ':'ح','ṣ':'ص','ḍ':'ض','ṭ':'ط','ẓ':'ظ','ʿ':'ع','ʾ':'ء','ā':'ا','ī':'ي','ū':'و'};
-  return Object.assign({},m,o);
-})();
-function tr2ar(w){
-  let s='',i=0;
-  while(i<w.length){
-    let f=false;
-    for(let l=3;l>=1;l--){
-      const sb=w.slice(i,i+l);
-      if(R[sb]){s+=R[sb];i+=l;f=true;break;}
-    }
-    if(!f){s+=w[i];i++;}
-  }
   return s;
 }
 
@@ -651,7 +695,15 @@ function makeStems(entry){
   const pastTr3=ar2tr(pastStem3);
   const pastTrShort=ar2tr(pastStemShort);
   const presTr=ar2tr(presStem);
-  const presAr=tr2ar(presStem);
+
+  // Arabic present stem: reg/doubled reuse past stem; hollow/def lookup manually
+  let presAr;
+  if(type==='reg'||type==='doubled'){
+    presAr=pastStemShort;
+  }else if(type==='hollow'||type==='def'){
+    presAr=PRES_AR[past3];
+    if(!presAr) return null;
+  }
 
   if(type==='reg'||type==='doubled'){
     past.push({ar:pastStemShort+'ت',  tr:pastTrShort+'t',  segs:[[pastTrShort,'t'],['t','s']]});
