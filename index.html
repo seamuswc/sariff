@@ -599,6 +599,26 @@ function ar2tr(w){
   return s;
 }
 
+const R=(()=>{
+  const m={};
+  for(const[k,v] of Object.entries(T)) m[v]=k;
+  // multi-char overrides (longer first)
+  const o={'th':'ث','kh':'خ','sh':'ش','gh':'غ','dh':'ذ','ḥ':'ح','ṣ':'ص','ḍ':'ض','ṭ':'ط','ẓ':'ظ','ʿ':'ع','ʾ':'ء','ā':'ا','ī':'ي','ū':'و'};
+  return Object.assign({},m,o);
+})();
+function tr2ar(w){
+  let s='',i=0;
+  while(i<w.length){
+    let f=false;
+    for(let l=3;l>=1;l--){
+      const sb=w.slice(i,i+l);
+      if(R[sb]){s+=R[sb];i+=l;f=true;break;}
+    }
+    if(!f){s+=w[i];i++;}
+  }
+  return s;
+}
+
 function makeStems(entry){
   const [past3,pres3,type,gloss]=entry;
   
@@ -631,6 +651,7 @@ function makeStems(entry){
   const pastTr3=ar2tr(pastStem3);
   const pastTrShort=ar2tr(pastStemShort);
   const presTr=ar2tr(presStem);
+  const presAr=tr2ar(presStem);
 
   if(type==='reg'||type==='doubled'){
     past.push({ar:pastStemShort+'ت',  tr:pastTrShort+'t',  segs:[[pastTrShort,'t'],['t','s']]});
@@ -670,10 +691,11 @@ function makeStems(entry){
   const pSufTr=['','','i','','','','u','u'];
 
   for(let i=0;i<8;i++){
-    const word=pPref[i]+presStem+(pSuf[i]||'');
+    const wordAr=pPref[i]+presAr+(pSuf[i]||'');
+    const wordTr=pPrefTr[i]+presTr+(pSufTr[i]||'');
     const segs=[[pPrefTr[i],'p'],[presTr,'t']];
     if(pSuf[i]) segs.push([pSufTr[i],'s']);
-    pres.push({ar:word,tr:pPrefTr[i]+presTr+(pSufTr[i]||''),segs});
+    pres.push({ar:wordAr,tr:wordTr,segs});
   }
 
   const kindMap={reg:'regular',hollow:'hollow',def:'defective',doubled:'doubled'};
