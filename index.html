@@ -4,54 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ṣarrif — Syrian Levantine Verb Conjugator · صرّف</title>
-<meta name="description" content="Syrian Levantine Arabic verbs conjugated in past, present, and future — color-coded to show exactly what gets added and what changes.">
-<meta property="og:title" content="ṣarrif — Syrian Levantine Verb Conjugator">
-<meta property="og:description" content="Syrian Levantine Arabic verbs, color-coded: prefixes, suffixes, and stem changes at a glance.">
-<meta property="og:url" content="https://sarrif.xyz">
+<meta name="description" content="100 Syrian Levantine Arabic verbs conjugated in past, present, and future — color-coded.">
 <link rel="canonical" href="https://sarrif.xyz">
 <meta name="robots" content="index, follow">
-<meta name="keywords" content="syrian arabic verb conjugator, levantine arabic conjugation, learn arabic, arabic verbs, تصريف الأفعال, شامي, syrian arabic grammar, past present future arabic">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="ṣarrif">
-<meta property="og:locale" content="en_US">
-<meta property="og:locale:alternate" content="ar_AR">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ṣarrif — Syrian Levantine Verb Conjugator">
-<meta name="twitter:description" content="Syrian Levantine Arabic verbs, color-coded: prefixes, suffixes, and stem changes at a glance.">
 <meta name="theme-color" content="#2B4C9B">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "ṣarrif — Syrian Levantine Verb Conjugator",
-  "alternateName": "صرّف",
-  "url": "https://sarrif.xyz",
-  "description": "Syrian Levantine Arabic verbs conjugated in past, present, and future — color-coded to show exactly what gets added and what changes.",
-  "applicationCategory": "EducationalApplication",
-  "operatingSystem": "Any",
-  "inLanguage": ["en", "ar"],
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-}
-</script>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232B4C9B'/%3E%3Ctext x='32' y='46' font-size='40' text-anchor='middle' fill='white' font-family='serif'%3E%D8%B5%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --paper:#F7F6F1; --panel:#FFFFFF; --ink:#221F1A; --muted:#8A857A;
-  --line:#E3E0D7; --line2:#CFCBBF;
-  --lapis:#2B4C9B; --lapis-bg:#EDF1FA;
-  --green:#22714F; --saffron:#A87708; --stem:#7C7668;
-}
-@media (prefers-color-scheme: dark){
-  :root{
-    --paper:#15171D; --panel:#1C1F27; --ink:#E9E6DE; --muted:#8B8FA0;
-    --line:#2A2E3A; --line2:#3A3F4E;
-    --lapis:#8AA6EC; --lapis-bg:#232B42;
-    --green:#5FBF8F; --saffron:#E0B24A; --stem:#9AA0B2;
-  }
-}
+:root{--paper:#F7F6F1;--panel:#FFFFFF;--ink:#221F1A;--muted:#8A857A;--line:#E3E0D7;--line2:#CFCBBF;--lapis:#2B4C9B;--lapis-bg:#EDF1FA;--green:#22714F;--saffron:#A87708;--stem:#7C7668;}
+@media (prefers-color-scheme: dark){:root{--paper:#15171D;--panel:#1C1F27;--ink:#E9E6DE;--muted:#8B8FA0;--line:#2A2E3A;--line2:#3A3F4E;--lapis:#8AA6EC;--lapis-bg:#232B42;--green:#5FBF8F;--saffron:#E0B24A;--stem:#9AA0B2;}}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:15px;line-height:1.5}
 html,body{height:100%}
@@ -93,19 +55,13 @@ th{text-align:start;font-size:11.5px;text-transform:uppercase;letter-spacing:.07
 td{padding:10px;border-bottom:1px solid var(--line);vertical-align:middle}
 td.pn{color:var(--muted);font-size:12.5px;white-space:nowrap}
 td.aw{font-size:26px}
-td.bf{font-size:15px}
-.sp{color:var(--line2);padding:0 2px}
-.seg-p{color:var(--lapis);font-weight:600}
-.seg-s{color:var(--green);font-weight:600}
-.seg-c{color:var(--saffron);font-weight:600}
-.seg-t{color:var(--stem)}
 footer{padding:20px 30px;color:var(--muted);font-size:12px;border-top:1px solid var(--line)}
 </style>
 </head>
 <body>
 <header>
   <h1><span class="ar">تصريف الأفعال</span>Syrian Levantine Verb Conjugator</h1>
-  <p>Common verbs · past, present, future · what gets added, what changes</p>
+  <p>100 verbs · past, present, future · what gets added, what changes</p>
 </header>
 <div class="wrap">
   <div class="side">
@@ -127,665 +83,143 @@ footer{padding:20px 30px;color:var(--muted);font-size:12px;border-top:1px solid 
     <table id="tbl" aria-live="polite"></table>
   </main>
 </div>
-<footer>Support — ETH (Ethereum or any L2): <span id="ethaddr" style="font-family:ui-monospace,Menlo,monospace;word-break:break-all;user-select:all;cursor:pointer" title="Click to copy">0x7598557A58F1F0972EE7b66214D546a3328065bE</span></footer>
+<footer>Support — ETH: <span id="ethaddr" style="font-family:ui-monospace,Menlo,monospace;word-break:break-all;user-select:all;cursor:pointer" title="Click to copy">0x7598557A58F1F0972EE7b66214D546a3328065bE</span></footer>
 <script>
-const VERBS=[
-  ["كتب","byiktob","reg","write"],
-  ["قال","byiʔuul","irr","say"],
-  ["عمل","byiʕmel","reg","do, work"],
-  ["راح|رح","byiruuH","hollow","go"],
-  ["إجا","byiiji","irr","come"],
-  ["شاف|شف","byishuuf","hollow","see"],
-  ["أخد","byaaxud","reg","take"],
-  ["عرف","byiʕraf","reg","know"],
-  ["لقى","byilaaʔi","def","find, meet"],
-  ["قدر","byiʔdar","reg","be able"],
-  ["صار|صر","byisiiR","hollow","become"],
-  ["ظل","byiZall","reg","remain"],
-  ["بقى","byibʔa","def","stay"],
-  ["قرأ","byiʔra","reg","read"],
-  ["سمع","byismaʕ","reg","hear"],
-  ["كلم","byikallim","reg","speak"],
-  ["حكى","byiHkii","def","tell, speak"],
-  ["فهم","byifham","reg","understand"],
-  ["فكر","byifakkar","reg","think"],
-  ["تذكر","byitḏakkar","reg","remember"],
-  ["نسي","byinsa","reg","forget"],
-  ["حب","byiHibb","doubled","love, like"],
-  ["كره","byikrah","reg","hate"],
-  ["حس","byiHiss","reg","feel"],
-  ["بلش","byiballish","reg","begin"],
-  ["خلص","byikhalles","reg","finish"],
-  ["وقف","byiwʔif","reg","stop"],
-  ["كمل","byikammil","reg","complete"],
-  ["حاول","byiHaawil","reg","try"],
-  ["طلب","byiṭlub","reg","request, ask for"],
-  ["عطى","byiʕṭii","def","give"],
-  ["حط","byiHuTT","doubled","put"],
-  ["ترك","byitrak","reg","leave"],
-  ["دخل","byidkhul","reg","enter"],
-  ["طلع","byiṭlaʕ","reg","go out, rise"],
-  ["رجع","byirjaʕ","reg","return"],
-  ["وصل","byiwSil","reg","arrive"],
-  ["مشى","byimshii","def","walk"],
-  ["ركض","byirkud","reg","run"],
-  ["قعد","byiʕud","reg","sit down"],
-  ["نام|نم","byinuum","hollow","sleep"],
-  ["أكل","byaakul","reg","eat"],
-  ["شرب","byishrab","reg","drink"],
-  ["طبخ","byiṭbukh","reg","cook"],
-  ["غسل","byighsil","reg","wash"],
-  ["لبس","byilbis","reg","wear"],
-  ["سكن","byiskun","reg","live, reside"],
-  ["عاش|عيش","byiʔiiʃ","hollow","live"],
-  ["مات|موت","byimuut","hollow","die"],
-  ["كبر","byikbir","reg","grow up"],
-  ["تجوز","byitjawwiz","reg","get married"],
-  ["حمل","byiHmil","reg","carry"],
-  ["ساعد","byisaaʕid","reg","help"],
-  ["خدم","byikhudum","reg","serve"],
-  ["قابل","byiqaabil","reg","meet"],
-  ["زار|زور","byizuur","hollow","visit"],
-  ["دعا|دعو","byidʕii","def","invite, call"],
-  ["رحب","byirHab","reg","welcome"],
-  ["ودع","byiwdaʕ","reg","bid farewell"],
-  ["شكر","byishkur","reg","thank"],
-  ["سامح","byisaamiH","reg","forgive"],
-  ["وعد","byiwʕad","reg","promise"],
-  ["كذب","byikdhib","reg","lie"],
-  ["سأل","byisal","reg","ask"],
-  ["رد","byirud","reg","reply"],
-  ["شرح","byishraH","reg","explain"],
-  ["وصف","byiSif","reg","describe"],
-  ["ناقش","byinaaqish","reg","discuss"],
-  ["قرر","byiqarrar","reg","decide"],
-  ["اختار","byikhtaar","reg","choose"],
-  ["فضل","byifDall","reg","prefer"],
-  ["قبل","byiqbil","reg","accept"],
-  ["منع","byimnaʕ","reg","prevent, forbid"],
-  ["سمح","byismaH","reg","allow"],
-  ["أمر","byiaamur","reg","order, command"],
-  ["نصح","byinaSHaH","reg","advise"],
-  ["حذر","byiHdhar","reg","warn"],
-  ["هدد","byihaddid","reg","threaten"],
-  ["أكد","byiakkid","reg","confirm"],
-  ["شك","byishakk","reg","doubt"],
-  ["توقع","byitawaqqaʕ","reg","expect"],
-  ["تخيل","byitkayyal","reg","imagine"],
-  ["حلم","byiHlum","reg","dream"],
-  ["أمل","byiaamul","reg","hope"],
-  ["خطط","byikhaTTiT","reg","plan"],
-  ["قصد","byiqSud","reg","intend"],
-  ["نوى","byinwii","def","intend"],
-  ["جهز","byijahhiz","reg","prepare"],
-  ["حضر","byiHaDhar","reg","attend, be present"],
-  ["رتب","byirattib","reg","arrange"],
-  ["بدل","byibdal","reg","change"],
-  ["غير","byighayyar","reg","change (something)"],
-  ["زاد|زيد","byiziid","hollow","increase"],
-  ["نقص","byinaqaS","reg","decrease"],
-  ["رفع","byirfaʕ","reg","raise, lift"],
-  ["خفض","byikhafD","reg","lower"],
-  ["فتح","byiftaH","reg","open"],
-  ["سكر","byiskar","reg","close"],
-  ["كسر","byiksur","reg","break"],
-  ["صلح","byiSlaH","reg","fix, repair"],
-  ["بنى","byibnii","def","build"],
-  ["هدم","byihdim","reg","demolish"],
-  ["صنع","byiSnaʕ","reg","make, manufacture"],
-  ["نشر","byinshur","reg","publish"],
-  ["وزع","byiwaziʕ","reg","distribute"],
-  ["جمع","byijmaʕ","reg","gather"],
-  ["فصل","byifSall","reg","separate"],
-  ["خلط","byikhalTiT","reg","mix"],
-  ["ربط","byirbuT","reg","tie, connect"],
-  ["حل","byiHall","reg","solve"],
-  ["فك","byifkak","reg","undo"],
-  ["قطع","byiqTaʕ","reg","cut"],
-  ["لصق","byilSaq","reg","stick"],
-  ["علق","byiʕalliq","reg","hang"],
-  ["ثبت","byithabbit","reg","fix in place"],
-  ["ركب","byirkab","reg","install, ride"],
-  ["نزل","byinzil","reg","descend, get off"],
-  ["صعد","byiSʕud","reg","climb, go up"],
-  ["طار|طير","byiTiiR","hollow","fly"],
-  ["سبح","byisbaH","reg","swim"],
-  ["قفز","byiqfiz","reg","jump"],
-  ["وقع","byiwqaʕ","reg","fall, happen"],
-  ["رمى","byirmii","def","throw"],
-  ["مسك","byimsik","reg","grab, hold"],
-  ["سحب","byisHab","reg","pull"],
-  ["جرّ","byijarr","reg","drag"],
-  ["دفع","byidfaʕ","reg","push, pay"],
-  ["حرك","byiHarrik","reg","move (something)"],
-  ["نقل","byinʔul","reg","transport"],
-  ["جاب|جيب","byijiib","hollow","bring"],
-  ["بعت","byibʕat","reg","send"],
-  ["سلم","byisallim","reg","hand over"],
-  ["وزن","byiwazin","reg","weigh"],
-  ["عدّ","byiʕidd","reg","count"],
-  ["حسب","byiHsab","reg","calculate"],
-  ["ضرب","byiDrib","reg","hit"],
-  ["ساوى","byisaawii","def","equal"],
-  ["قيّم","byiqayyim","reg","evaluate"],
-  ["كلف","byikallif","reg","cost"],
-  ["اشترى","byishtarii","def","buy"],
-  ["باع|بيع","byibiiʕ","hollow","sell"],
-  ["كسب","byiksab","reg","earn"],
-  ["ربح","byirbaH","reg","profit"],
-  ["خسر","byikhsar","reg","lose"],
-  ["صرف","byiSrif","reg","spend, exchange"],
-  ["وفّر","byiwaffir","reg","save"],
-  ["اقترض","byiqtiraD","reg","borrow"],
-  ["سدد","byisaddid","reg","pay back"],
-  ["صدر","byiSdir","reg","export"],
-  ["ورّد","byiwarrid","reg","import"],
-  ["ملك","byimilak","reg","own"],
-  ["قبض","byiqbiD","reg","receive"],
-  ["حوّل","byiHawwil","reg","transfer"],
-  ["سرع","byisraʕ","reg","hurry"],
-  ["تأخر","byitaʔakhkhar","reg","be late"],
-  ["انتظر","byintaZar","reg","wait"],
-  ["بدا","byibda","reg","seem"],
-  ["ظهر","byiZhar","reg","appear"],
-  ["اختفى","byikhtafii","def","disappear"],
-  ["غاب","byighaab","reg","be absent"],
-  ["مطر","byimṭar","reg","rain"],
-  ["زرع","byizraʕ","reg","plant"],
-  ["حصد","byiHSud","reg","harvest"],
-  ["سقى","byisqii","def","water"],
-  ["قطف","byiqTuf","reg","pick"],
-  ["نضج","byinaDj","reg","ripen"],
-  ["فسد","byifsud","reg","spoil"],
-  ["قلى","byiqallii","def","fry"],
-  ["سلق","byisluq","reg","boil"],
-  ["شوى","byishwii","def","grill"],
-  ["خبز","byikhbez","reg","bake bread"],
-  ["عجن","byiʕjin","reg","knead"],
-  ["ذاق","byidhaaq","reg","taste"],
-  ["بلع","byibilʕ","reg","swallow"],
-  ["مضغ","byimDagh","reg","chew"],
-  ["هضم","byihDum","reg","digest"],
-  ["جوع|جيع","byijiiʕ","hollow","be hungry"],
-  ["عطش","byiʕṭash","reg","be thirsty"],
-  ["شبع","byishbaʕ","reg","be full"],
-  ["قدّم","byiqaddim","reg","offer"],
-  ["حجز","byiHjiz","reg","reserve"],
-  ["غنّى","byighannii","def","sing"],
-  ["رقص","byirquS","reg","dance"],
-  ["عزف","byiʕzif","reg","play (instrument)"],
-  ["لعب","byilʕab","reg","play"],
-  ["فاز|فوز","byifuuZ","hollow","win"],
-  ["سجّل","byisajjal","reg","record"],
-  ["ضحك","byiDHak","reg","laugh"],
-  ["بسم","byibassim","reg","smile"],
-  ["بكى","byibkii","def","cry"],
-  ["حزن","byiHzan","reg","be sad"],
-  ["فرح","byifraH","reg","be happy"],
-  ["غضب","byighaDab","reg","be angry"],
-  ["خجل","byikhjil","reg","be shy"],
-  ["ندم","byinadm","reg","regret"],
-  ["قلق","byiqlaq","reg","worry"],
-  ["خاف|خوف","byikhaaf","hollow","fear"],
-  ["اشتاق|شوق","byishtaaq","hollow","miss, long for"],
-  ["رتاح|رتح","byirtaaH","hollow","rest, relax"],
-  ["ملّ","byimall","doubled","be bored"],
-  ["تعب","byitʕab","reg","get tired"],
-  ["مرض","byimraD","reg","get sick"],
-  ["شفى","byishfii","def","heal"],
-  ["تنفّس","byitnaffas","reg","breathe"],
-  ["سعل","byisʕal","reg","cough"],
-  ["عطس","byiʕTas","reg","sneeze"],
-  ["جرح","byijraH","reg","wound"],
-  ["فحص","byifHaS","reg","examine"],
-  ["دوّى","byidawwii","def","treat"],
-  ["حمّم","byiHammim","reg","bathe"],
-  ["حلق","byiHlaq","reg","shave"],
-  ["درس","byidrus","reg","study"],
-  ["درّس","byidarris","reg","teach"],
-  ["علّم","byiʕallim","reg","teach"],
-  ["تعلّم","byitʕallam","reg","learn"],
-  ["حفظ","byiHfaZ","reg","memorize"],
-  ["راجع","byiraajiʕ","reg","review"],
-  ["امتحن","byimtaHin","reg","test, examine"],
-  ["نجح","byinjaH","reg","succeed"],
-  ["رسب","byirasab","reg","fail (exam)"],
-  ["فشل","byifshal","reg","fail"],
-  ["تخرّج","byitkharraj","reg","graduate"],
-  ["انضمّ","byinDamm","doubled","join"],
-  ["لخّص","byilakhkhaS","reg","summarize"],
-  ["فسّر","byifassir","reg","explain"],
-  ["عبّر","byiʕabbar","reg","express"],
-  ["بحث","byibḤath","reg","search"],
-  ["كشف","byikshaf","reg","discover"],
-  ["اخترع","byikhtariʕ","reg","invent"],
-  ["جرّب","byijarrab","reg","try, test"],
-  ["حلّل","byiHallil","reg","analyze"],
-  ["قارن","byiqaarin","reg","compare"],
-  ["لاحظ","byilaHZaZ","reg","notice"],
-  ["ركّز","byirakkiz","reg","focus"],
-  ["نسخ","byinsakh","reg","copy"],
-  ["حذف","byiHdaf","reg","delete"],
-  ["ضاف","byiDaaf","reg","add"],
-  ["عدّل","byiʕaddil","reg","adjust"],
-  ["صحّح","byiSallal","reg","correct"],
-  ["حمّل","byiHammi","reg","download"],
-  ["نزّل","byinazzil","reg","download"],
-  ["شغّل","byishaggil","reg","operate, turn on"],
-  ["طفى","byiTfii","def","turn off"],
-  ["وصل","byiwSil","reg","connect"],
-  ["اتصل","byitlaSil","reg","call, contact"],
-  ["استخدم","byistakhdum","reg","use"],
-  ["طبّق","byiṭabbiq","reg","apply"],
-  ["نفّذ","byinaffiḍ","reg","carry out"],
-  ["وظّف","byiwazZif","reg","employ"],
-  ["عيّن","byiʕayyin","reg","appoint"],
-  ["استقال","byistaqiil","reg","resign"],
-  ["تقاعد","byitqaaʕad","reg","retire"],
-  ["دوّر","byidawwar","reg","manage, run"],
-  ["نظّف","byinazzif","reg","clean"],
-  ["كنس","byiknis","reg","sweep"],
-  ["مسح","byimsiH","reg","wipe"],
-  ["كوي","byikwii","def","iron"],
-  ["خاط|خيط","byikhuuT","hollow","sew"],
-  ["حدّد","byiHaddid","reg","specify"],
-  ["وضّح","byiwadDaH","reg","clarify"],
-  ["بيّن","byibayyin","reg","show"],
-  ["دلّ","byidull","doubled","indicate"],
-  ["قاد","byiqaad","reg","lead, drive"],
-  ["ساق","byisaaq","reg","drive"],
-  ["قام|قوم","byiquum","hollow","rise, stand up"],
-  ["دافع","byidaafiʕ","reg","defend"],
-  ["هاجم","byihaajim","reg","attack"],
-  ["حارب","byiHaarib","reg","fight (war)"],
-  ["قتل","byiʔtil","reg","kill"],
-  ["انتصر","byintasiir","hollow","triumph"],
-  ["هزم","byihzim","reg","defeat"],
-  ["استسلم","byistaslim","reg","surrender"],
-  ["حمى","byiHma","reg","protect"],
-  ["أنقذ","byinqiḍ","reg","rescue"],
-  ["خطف","byikhuTuf","reg","kidnap"],
-  ["سرق","byisrig","reg","steal"],
-  ["خدع","byikhdaʕ","reg","deceive"],
-  ["حقّق","byiHaqqiq","reg","achieve"],
-  ["أحرق","byiHraq","reg","burn"],
-  ["غرق","byighraq","reg","drown"],
-  ["غطس","byighTuS","reg","dive"],
-  ["عام|عوم","byiʕuum","hollow","float, swim"],
-  ["حفر","byiHfur","reg","dig"],
-  ["دفن","byidfin","reg","bury"],
-  ["لمس","byilmas","reg","touch"],
-  ["ضغط","byiDghuT","reg","press"],
-  ["دق","byiduq","reg","knock"],
-  ["طرق","byiṭruq","reg","knock"],
-  ["فرك","byifruk","reg","rub"],
-  ["عصر","byiʕSir","reg","squeeze"],
-  ["سكب","byiskub","reg","pour"],
-  ["ملّأ","byimallii","def","fill"],
-  ["فرغ","byifragh","reg","empty"],
-  ["رشّ","byirushsh","doubled","spray"],
-  ["نفخ","byinfugh","reg","blow"],
-  ["مصّ","byimuSS","doubled","suck"],
-  ["عضّ","byiʕaDD","doubled","bite"],
-  ["خدش","byikhduSH","reg","scratch"],
-  ["قرص","byiqruS","reg","pinch"],
-  ["شدّ","byishudd","doubled","pull tight"],
-  ["لوى","byilwii","def","twist"],
-  ["ثنى","byithnii","def","fold"],
-  ["طوى","byiTwii","def","fold"],
-  ["بسط","byibsuT","reg","spread out"],
-  ["مدّ","byimudd","doubled","extend"],
-  ["لفّ","byiluff","doubled","wrap"],
-  ["غطّى","byighaTTii","def","cover"],
-  ["فرش","byifrish","reg","furnish"],
-  ["زيّن","byizayyin","reg","decorate"],
-  ["ذكّر","byiḏakkar","reg","remind"],
-  ["سلّق","byisallaq","reg","climb (tree)"],
-  ["زلق","byizlaq","reg","slip"],
-  ["زحف","byizHaf","reg","crawl"],
-  ["ركل","byirkul","reg","kick"],
-  ["صدّ","byiSud","doubled","block"],
-  ["مرّ","byimur","reg","pass"],
-  ["دام","byidaam","reg","last"],
-  ["أجل","byiaajil","reg","postpone"],
-  ["دار|دور","byiduur","hollow","turn"],
-  ["ذكر","byiʔkur","reg","mention"],
-  ["شغل","byishghul","reg","work, be employed"],
-  ["جهد","byijhad","reg","work hard"],
-  ["جمع","byijmaʕ","reg","meet, assemble"],
-  ["قرب","byiqrub","reg","approach"],
-  ["عمد","byiʕmid","reg","rely on"],
-  ["نشر","byinshur","reg","spread"],
-  ["فقد","byifqid","reg","miss (someone)"],
-  ["بدأ","byibda","reg","start"],
-  ["عوّد","byiʕawwid","reg","be accustomed"],
-  ["ردّى","byirdii","def","wear, put on"],
-  ["خلع","byikhlaaʕ","reg","take off (clothes)"],
-  ["وسع","byiwsiʕ","reg","be wide enough"],
-  ["ضحك","byiDHaak","reg","make laugh"],
-  ["بكى","byibkii","def","make cry"],
-  ["نجز","byinajjiz","reg","accomplish"],
-  ["خطأ","byikhta","reg","make a mistake"],
-  ["صدر","byiSdir","reg","issue, publish"],
-  ["لغى","byilghii","def","cancel"],
-  ["مضى","byimDii","def","spend (time)"],
-  ["مكن","byimkin","reg","be possible, enable"],
-  ["زعج","byizʕaj","reg","annoy"],
-  ["قلع","byiqlaaʕ","reg","take off (plane)"],
-  ["دخل","byidakhkhal","reg","insert"],
-  ["خرج","byikhrij","reg","take out"],
-  ["ظهر","byiDhir","reg","show, display"],
-  ["خفي","byikhfa","reg","hide (something)"],
-  ["زال","byizaal","reg","remove"],
-  ["محا","byimHaa","reg","erase"],
-  ["زهر","byizhar","reg","bloom"],
-  ["فاد","byifaad","reg","benefit"],
-  ["طاع","byiTaaʕ","reg","obey"],
-  ["عاد","byiʕaad","reg","repeat"],
-  ["قام|قوم","byiquum","hollow","hold (event)"],
-  ["نهض","byinhaD","reg","get up"],
-  ["رقد","byirqad","reg","lie down"],
-  ["جنّب","byijannib","reg","avoid"],
-  ["قدّم","byiqaddam","reg","advance, apply"],
-  ["دخل","byidakhkhal","reg","intervene"],
-  ["حمل","byiHma","reg","bear, endure"],
-  ["خلّص","byikhalles","reg","get rid of"],
-  ["صرف","byiSraf","reg","behave, act"],
-  ["عرف","byiʕraf","reg","get to know"],
-  ["لقى","byilʔa","def","receive (news)"],
-  ["سبق","byisbaq","reg","precede"],
-  ["لحق","byilHaqq","doubled","catch up"],
-  ["تبع","byitbaʕ","reg","follow"],
-  ["طرد","byiṭrud","reg","expel"],
-  ["هرب","byihrub","reg","escape"],
-  ["سبح","byisbaH","reg","praise"],
-  ["حيّر","byiHayyir","reg","confuse"],
-  ["آذن","byiaadhan","reg","call to prayer"],
-  ["أثر","byiaathar","reg","influence"],
-  ["نصر","byinSar","reg","support"],
-  ["عزم","byiʕzim","reg","resolve"],
-  ["نجا","byinja","reg","survive"],
-  ["قطع","byiqTaʕ","reg","be cut off"],
-  ["فجر","byifjir","reg","explode"],
-  ["سحب","byisHab","reg","withdraw"],
-  ["فتح","byiftaH","reg","open (intr.)"],
-  ["فصل","byifSil","reg","separate (intr.)"],
-  ["شرك","byishrik","reg","subscribe"],
-  ["حوى","byiHwii","def","contain"],
-  ["ضمّن","byiDmann","doubled","include"],
-  ["شمل","byishmil","reg","include"],
-  ["حوّط","byiHawwiT","reg","surround"],
-  ["وسّع","byiwassiʕ","reg","widen"],
-  ["قلّص","byiʔalliS","reg","reduce"],
-  ["خصّص","byikhassiS","reg","allocate"],
-  ["فوّض","byifawwaD","reg","delegate"],
-  ["رشّح","byirashshaH","reg","nominate"],
-  ["صحّ","byiSallal","reg","be correct"],
-  ["غلط","byighluT","reg","make a mistake"],
-  ["حسد","byiHsad","reg","envy"],
-  ["افتخر","byiftakhar","reg","be proud"],
-  ["ثقّف","byithaqaf","reg","educate"],
-  ["درك","byidrak","reg","realize"],
-  ["حيّر","byiHayyar","reg","be confused"],
-  ["ردّد","byiraddid","reg","hesitate"],
-  ["جرأ","byijarra","reg","dare"],
-  ["خطر","byikhtur","reg","occur (to mind)"],
-  ["بدّى","byibdii","def","express, show"],
-  ["جرى","byijr","reg","conduct"],
-  ["لزم","byilzim","reg","be necessary"],
-  ["التزم","byiltazim","reg","commit to"],
-  ["كفى","byikfa","reg","be enough"],
-  ["كفل","byikfil","reg","sponsor"],
-  ["خضع","byikhaDaʕ","reg","submit"],
-  ["رغب","byirghab","reg","desire"],
-  ["أجبر","byiaajbar","reg","force"],
-  ["حرص","byiHraS","reg","be keen"],
-  ["عشق","byiʕshaq","reg","adore"],
-  ["غار|غير","byighaar","hollow","be jealous"],
-  ["وثق","byiwathiq","reg","trust"],
-  ["أمن","byiaamin","reg","be safe"],
-  ["خان|خون","byikhaan","hollow","betray"],
-  ["خلص","byikhlas","reg","be loyal"],
-  ["ضحّى","byiDHa","reg","sacrifice"],
-  ["كرّم","byikarrim","reg","honor"],
-  ["هان|هون","byihaan","hollow","insult"],
-  ["حقر","byiHqir","reg","despise"],
-  ["سخر","byiskhar","reg","mock"],
-  ["مزح","byimzah","reg","joke"],
-  ["سلّى","byisallii","def","entertain"],
-  ["روى","byirwii","def","narrate"],
-  ["حكى","byiHkii","def","tell"],
-  ["زعم","byizʕam","reg","claim"],
-  ["نفى","byinfa","reg","deny"],
-  ["برّر","byibarrir","reg","justify"],
-  ["فند","byifnid","reg","refute"],
-  ["ثبت","byithabbit","reg","prove"],
-  ["غمض","byighmaD","reg","close (eyes)"],
-  ["حجب","byiHjab","reg","block"],
-  ["ستر","byistar","reg","conceal"],
-  ["فضح","byifDaH","reg","expose"],
-  ["علا","byiʕla","reg","rise"],
-  ["هوى","byihwii","def","fall; love"],
-  ["غاص|غوص","byighuus","hollow","dive"],
-  ["طفا","byiTfaa","reg","float"],
-  ["رسا","byirsaa","reg","anchor"],
-  ["بحر","byibHar","reg","set sail"],
-  ["واصل","byiwaaSil","reg","continue"],
-  ["كرّر","byikarrar","reg","repeat"],
-  ["عزل","byiʕzil","reg","isolate"],
-  ["فصل","byifSil","reg","separate"],
-  ["وحّد","byiwaHHid","reg","unify"],
-  ["دمج","byidmaj","reg","merge"],
-  ["ضمّ","byiDumm","doubled","annex"],
-  ["خزن","byikhazin","reg","store"],
-  ["سرد","byisrud","reg","recount"],
-  ["صنّف","byiSannif","reg","classify"],
-  ["شفّر","byishaffir","reg","encrypt"],
-  ["خمّن","byikhammin","reg","guess"],
-  ["جزم","byijzim","reg","assert"],
-];
-const IRREGULAR={
-  "قال":{past:["\u0642\u0644\u062a", "\u0642\u0644\u062a", "\u0642\u0644\u062a\u064a", "\u0642\u0627\u0644", "\u0642\u0627\u0644\u062a", "\u0642\u0644\u0646\u0627", "\u0642\u0644\u062a\u0648", "\u0642\u0627\u0644\u0648\u0627"],pres:["\u0628\u0642\u0648\u0644", "\u0628\u062a\u0642\u0648\u0644", "\u0628\u062a\u0642\u0648\u0644\u064a", "\u0628\u064a\u0642\u0648\u0644", "\u0628\u062a\u0642\u0648\u0644", "\u0645\u0646\u0642\u0648\u0644", "\u0628\u062a\u0642\u0648\u0644\u0648\u0627", "\u0628\u064a\u0642\u0648\u0644\u0648\u0627"],kind:"irregular (root q-w-l)"},
-  "إجا":{past:["\u062c\u064a\u062a", "\u062c\u064a\u062a", "\u062c\u064a\u062a\u064a", "\u0625\u062c\u0627", "\u0625\u062c\u062a", "\u062c\u064a\u0646\u0627", "\u062c\u064a\u062a\u0648", "\u0625\u062c\u0648"],pres:["\u0628\u0627\u062c\u064a", "\u0628\u062a\u0627\u062c\u064a", "\u0628\u062a\u0627\u062c\u064a", "\u0628\u064a\u0627\u062c\u064a", "\u0628\u062a\u0627\u062c\u064a", "\u0645\u0646\u0627\u062c\u064a", "\u0628\u062a\u0627\u062c\u0648\u0627", "\u0628\u064a\u0627\u062c\u0648\u0627"],kind:"irregular (root j-y-ʾ)"},
-};
-const PRES_AR={
-  "راح|رح":"روح",
-  "شاف|شف":"شوف",
-  "صار|صر":"صير",
-  "نام|نم":"نوم",
-  "عاش|عيش":"عيش",
-  "مات|موت":"موت",
-  "زار|زور":"زور",
-  "زاد|زيد":"زيد",
-  "طار|طير":"طير",
-  "جوع|جيع":"جيع",
-  "خاف|خوف":"خاف",
-  "اشتاق|شوق":"شوق",
-  "رتاح|رتح":"رتاح",
-  "خاط|خيط":"خيط",
-  "دار|دور":"دور",
-  "قام|قوم":"قوم",
-  "انتصر":"نتصر",
-  "غار|غير":"غار",
-  "خان|خون":"خون",
-  "هان|هون":"هان",
-  "باع|بيع":"بيع",
-  "فاز|فوز":"فوز",
-  "عام|عوم":"عوم",
-  "غاص|غوص":"غوص",
-  "جاب|جيب":"جيب",
-  "لقى":"لاقي",
-  "بقى":"بقا",
-  "حكى":"حكي",
-  "عطى":"عطي",
-  "مشى":"مشي",
-  "دعا|دعو":"دعي",
-  "نوى":"نوي",
-  "بنى":"بني",
-  "رمى":"رمي",
-  "سقى":"سقي",
-  "غنّى":"غني",
-  "بكى":"بكي",
-  "اشترى":"شتري",
-  "ساوى":"ساوي",
-  "قيّم":"قيم",
-  "ملّأ":"ملي",
-  "طفى":"طفي",
-  "كوي":"كوي",
-  "لوى":"لوي",
-  "ثنى":"ثني",
-  "طوى":"طوي",
-  "غطّى":"غطي",
-  "شفى":"شفي",
-  "دوّى":"دوي",
-  "اختفى":"ختفي",
-  "ردّى":"ردي",
-  "لغى":"لغي",
-  "مضى":"مضي",
-  "بدّى":"بدي",
-  "سلّى":"سلي",
-  "روى":"روي",
-  "هوى":"هوي",
-  "حوى":"حوي",
-  "قلى":"قلي",
-  "شوى":"شوي",
-  "قال":null,
-  "إجا":null,
-};
-
-const T={'ب':'b','ت':'t','ث':'th','ج':'j','ح':'ḥ','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'ṣ','ض':'ḍ','ط':'ṭ','ظ':'ẓ','ع':'ʿ','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ء':'ʾ','أ':'ʾ','آ':'ā','إ':'ʾ','ؤ':'ʾ','ى':'ā','َ':'a','ُ':'u','ِ':'i','ّ':''};
 const PRONOUNS=["أنا ana — I","إنتا inta — you (m)","إنتي inti — you (f)","هوّي huwwe — he","هيّي hiyye — she","نحنا niḥna — we","إنتو intu — you (pl)","هنّه hénne — they"];
+const VERBS=[
+["كتب","byiktob","reg","write",["كتبت","كتبت","كتبتي","كتب","كتبت","كتبنا","كتبتو","كتبو"],["بكتب","بتكتب","بتكتبي","بيكتب","بتكتب","منكتب","بتكتبو","بيكتبو"]],
+["قال","byiʔuul","irr","say",["قلت","قلت","قلتي","قال","قالت","قلنا","قلتو","قالوا"],["بقول","بتقول","بتقولي","بيقول","بتقول","منقول","بتقولو","بيقولو"]],
+["عمل","byiʕmel","reg","do, work",["عملت","عملت","عملتي","عمل","عملت","عملنا","عملتو","عملو"],["بعمل","بتعمل","بتعملي","بيعمل","بتعمل","منعمل","بتعملو","بيعملو"]],
+["راح","byiruuH","hollow","go",["رحت","رحت","رحتي","راح","راحت","رحنا","رحتو","راحو"],["بروح","بتراح","بتراحي","بيروح","بتروح","منروح","بتراحو","بيروحو"]],
+["إجا","byiiji","irr","come",["جيت","جيت","جيتي","إجا","إجت","جينا","جيتو","إجوا"],["باجي","بتاجي","بتاجي","بياجي","بتاجي","مناجي","بتاجوا","بياجوا"]],
+["شاف","byishuuf","hollow","see",["شفت","شفت","شفتي","شاف","شافت","شفنا","شفتو","شافو"],["بشوف","بتشوف","بتشوفي","بيشوف","بتشوف","منشوف","بتشوفو","بيشوفو"]],
+["أخد","byaaxud","reg","take",["أخدت","أخدت","أخدتي","أخد","أخدت","أخدنا","أخدتو","أخدو"],["باخد","بتاخد","بتاخدي","بياخد","بتاخد","مناخد","بتاخدو","بياخدو"]],
+["عرف","byiʕraf","reg","know",["عرفت","عرفت","عرفتي","عرف","عرفت","عرفنا","عرفتو","عرفو"],["بعرف","بتعرف","بتعرفي","بيعرف","بتعرف","منعرف","بتعرفو","بيعرفو"]],
+["لقى","byilaaʔi","def","find, meet",["لقيت","لقيت","لقيتي","لقى","لقت","لقينا","لقيتو","لقوا"],["بلاقي","بتلاقي","بتلاقي","بيلاقي","بتلاقي","منلاقي","بتلاقوا","بيلاقوا"]],
+["قدر","byiʔdar","reg","be able",["قدرت","قدرت","قدرتي","قدر","قدرت","قدرنا","قدرتو","قدرو"],["بقدر","بتقدر","بتقدري","بيقدر","بتقدر","منقدر","بتقدرو","بيقدرو"]],
+["صار","byisiiR","hollow","become",["صرت","صرت","صرتي","صار","صارت","صرنا","صرتو","صارو"],["بصير","بتصير","بتصيري","بيصير","بتصير","منصير","بتصيرو","بيصيرو"]],
+["ظل","byiZall","reg","remain",["ظلّيت","ظلّيت","ظلّيتي","ظلّ","ظلّت","ظلّينا","ظلّيتو","ظلّو"],["بظل","بتظل","بتظلي","بيظل","بتظل","منظل","بتظلو","بيظلو"]],
+["بقى","byibʔa","def","stay",["بقيت","بقيت","بقيتي","بقى","بقت","بقينا","بقيتو","بقوا"],["ببقى","بتبقى","بتبقي","بيبقى","بتبقى","منبقى","بتبقوا","بيبقوا"]],
+["قرأ","byiʔra","reg","read",["قرأت","قرأت","قرأتي","قرأ","قرأت","قرأنا","قرأتو","قرأو"],["بقرأ","بتقرأ","بتقرأي","بيقرأ","بتقرأ","منقرأ","بتقرأو","بيقرأو"]],
+["سمع","byismaʕ","reg","hear",["سمعت","سمعت","سمعتي","سمع","سمعت","سمعنا","سمعتو","سمعو"],["بسمع","بتسمع","بتسمعي","بيسمع","بتسمع","منسمع","بتسمعو","بيسمعو"]],
+["كلم","byikallim","reg","speak",["كلمت","كلمت","كلمتي","كلم","كلمت","كلمنا","كلمتو","كلمو"],["بكلم","بتكلم","بتكلمي","بيكلم","بتكلم","منكلم","بتكلمو","بيكلمو"]],
+["حكى","byiHkii","def","tell, speak",["حكيت","حكيت","حكيتي","حكى","حكت","حكينا","حكيتو","حكوا"],["بحكي","بتحكي","بتحكي","بيحكي","بتحكي","منحكي","بتحكوا","بيحكوا"]],
+["فهم","byifham","reg","understand",["فهمت","فهمت","فهمتي","فهم","فهمت","فهمنا","فهمتو","فهمو"],["بفهم","بتفهم","بتفهمي","بيفهم","بتفهم","منفهم","بتفهمو","بيفهمو"]],
+["فكر","byifakkar","reg","think",["فكرت","فكرت","فكرتي","فكر","فكرت","فكرنا","فكرتو","فكرو"],["بفكر","بتفكر","بتفكري","بيفكر","بتفكر","منفكر","بتفكرو","بيفكرو"]],
+["نسي","byinsa","reg","forget",["نسيت","نسيت","نسيتي","نسي","نست","نسينا","نسيتو","نسوا"],["بنسى","بتنسى","بتنسي","بينسى","بتنسى","مننسى","بتنسوا","بينسوا"]],
+["حب","byiHibb","doubled","love, like",["حبّيت","حبّيت","حبّيتي","حبّ","حبّت","حبّينا","حبّيتو","حبّو"],["بحب","بتحب","بتحبي","بيحب","بتحب","منحب","بتحبو","بيحبو"]],
+["كره","byikrah","reg","hate",["كرهت","كرهت","كرهتي","كره","كرهت","كرهنا","كرهتو","كرهو"],["بكره","بتكره","بتكرهي","بيكره","بتكره","منكره","بتكرهو","بيكرهو"]],
+["حس","byiHiss","reg","feel",["حسّيت","حسّيت","حسّيتي","حسّ","حسّت","حسّينا","حسّيتو","حسّو"],["بحس","بتحس","بتحسي","بيحس","بتحس","منحس","بتحسو","بيحسو"]],
+["بلش","byiballish","reg","begin",["بلّشت","بلّشت","بلّشتي","بلّش","بلّشت","بلّشنا","بلّشتو","بلّشو"],["ببلّش","بتبلّش","بتبلّشي","بيبلّش","بتبلّش","منبلّش","بتبلّشو","بيبلّشو"]],
+["خلص","byikhalles","reg","finish",["خلّصت","خلّصت","خلّصتي","خلّص","خلّصت","خلّصنا","خلّصتو","خلّصو"],["بخلّص","بتخلّص","بتخلّصي","بيخلّص","بتخلّص","منخلّص","بتخلّصو","بيخلّصو"]],
+["وقف","byiwʔif","reg","stop",["وقفت","وقفت","وقفتي","وقف","وقفت","وقفنا","وقفتو","وقفو"],["بوقف","بتوقف","بتوقفي","بيوقف","بتوقف","منوقف","بتوقفو","بيوقفو"]],
+["كمل","byikammil","reg","complete",["كمّلت","كمّلت","كمّلتي","كمّل","كمّلت","كمّلنا","كمّلتو","كمّلو"],["بكمّل","بتكمّل","بتكمّلي","بيكمّل","بتكمّل","منكمّل","بتكمّلو","بيكمّلو"]],
+["حاول","byiHaawil","reg","try",["حاولت","حاولت","حاولتي","حاول","حاولت","حاولنا","حاولتو","حاولو"],["بحاول","بتحاول","بتحاولي","بيحاول","بتحاول","منحاول","بتحاولو","بيحاولو"]],
+["طلب","byiṭlub","reg","request, ask for",["طلبت","طلبت","طلبتي","طلب","طلبت","طلبنا","طلبتو","طلبو"],["بطلب","بتطلب","بتطلبي","بيطلب","بتطلب","منطلب","بتطلبو","بيطلبو"]],
+["عطى","byiʕṭii","def","give",["عطيت","عطيت","عطيتي","عطى","عطت","عطينا","عطيتو","عطوا"],["بعطي","بتعطي","بتعطي","بيعطي","بتعطي","منعطي","بتعطوا","بيعطوا"]],
+["حط","byiHuTT","doubled","put",["حطّيت","حطّيت","حطّيتي","حطّ","حطّت","حطّينا","حطّيتو","حطّو"],["بحطّ","بتحطّ","بتحطّي","بيحطّ","بتحطّ","منحطّ","بتحطّو","بيحطّو"]],
+["ترك","byitrak","reg","leave",["تركت","تركت","تركتي","ترك","تركت","تركنا","تركتو","تركو"],["بترك","بتترك","بتتركي","بيترك","بتترك","منترك","بتتركو","بيتركو"]],
+["دخل","byidkhul","reg","enter",["دخلت","دخلت","دخلتي","دخل","دخلت","دخلنا","دخلتو","دخلو"],["بدخل","بتدخل","بتدخلي","بيدخل","بتدخل","مندخل","بتدخلو","بيدخلو"]],
+["طلع","byiṭlaʕ","reg","go out, rise",["طلّعت","طلّعت","طلّعتي","طلّع","طلّعت","طلّعنا","طلّعتو","طلّعو"],["بطلّع","بتطلّع","بتطلّعي","بيطلّع","بتطلّع","منطلّع","بتطلّعو","بيطلّعو"]],
+["رجع","byirjaʕ","reg","return",["رجعت","رجعت","رجعتي","رجع","رجعت","رجعنا","رجعتو","رجعو"],["برجع","بترجع","بترجعي","بيرجع","بترجع","منرجع","بترجعو","بيرجعو"]],
+["وصل","byiwSil","reg","arrive",["وصلت","وصلت","وصلتي","وصل","وصلت","وصلنا","وصلتو","وصلو"],["بوصل","بتوصل","بتوصلي","بيوصل","بتوصل","منوصل","بتوصلو","بيوصلو"]],
+["مشى","byimshii","def","walk",["مشيت","مشيت","مشيتي","مشى","مشت","مشينا","مشيتو","مشوا"],["بمشي","بتمشي","بتمشي","بيمشي","بتمشي","منمشي","بتمشوا","بيمشوا"]],
+["ركض","byirkud","reg","run",["ركضت","ركضت","ركضتي","ركض","ركضت","ركضنا","ركضتو","ركضو"],["بركض","بتركض","بتركضي","بيركض","بتركض","منركض","بتركضو","بيركضو"]],
+["قعد","byiʕud","reg","sit down",["قعدت","قعدت","قعدتي","قعد","قعدت","قعدنا","قعدتو","قعدو"],["بقعد","بتقعد","بتقعدي","بيقعد","بتقعد","منقعد","بتقعدو","بيقعدو"]],
+["نام","byinuum","hollow","sleep",["نمت","نمت","نمتي","نام","نامت","نمنا","نمتو","نامو"],["بنوم","بتنوم","بتنومي","بينوم","بتنوم","مننوم","بتنومو","بينومو"]],
+["أكل","byaakul","reg","eat",["أكلت","أكلت","أكلتي","أكل","أكلت","أكلنا","أكلتو","أكلو"],["باكل","بتاكل","بتاكلي","بياكل","بتاكل","مناكل","بتاكلو","بياكلو"]],
+["شرب","byishrab","reg","drink",["شربت","شربت","شربتي","شرب","شربت","شربنا","شربتو","شربو"],["بشرب","بتشرب","بتشربي","بيشرب","بتشرب","منشرب","بتشربو","بيشربو"]],
+["طبخ","byiṭbukh","reg","cook",["طبّخت","طبّخت","طبّختي","طبّخ","طبّخت","طبّخنا","طبّختو","طبّخو"],["بطبّخ","بتطبّخ","بتطبّخي","بيطبّخ","بتطبّخ","منطبّخ","بتطبّخو","بيطبّخو"]],
+["غسل","byighsil","reg","wash",["غسلت","غسلت","غسلتي","غسل","غسلت","غسلنا","غسلتو","غسلو"],["بغسل","بتغسل","بتغسلي","بيغسل","بتغسل","منغسل","بتغسلو","بيغسلو"]],
+["لبس","byilbis","reg","wear",["لبست","لبست","لبستي","لبس","لبست","لبسنا","لبستو","لبسو"],["بلبس","بتللبس","بتللبسي","بيلبس","بتللبس","منلبس","بتللبسو","بيلبسو"]],
+["سكن","byiskun","reg","live, reside",["سكنت","سكنت","سكنتي","سكن","سكنت","سكننا","سكنتو","سكنو"],["بسكن","بتسكن","بتسكني","بيسكن","بتسكن","منسكن","بتسكنو","بيسكنو"]],
+["عاش","byiʔiiʃ","hollow","live",["عشت","عشت","عشيتي","عاش","عاشت","عشينا","عشيتو","عاشو"],["بعيش","بتعيش","بتعيشي","بيعيش","بتعيش","منعيش","بتعيشو","بيعيشو"]],
+["مات","byimuut","hollow","die",["متّ","متّ","متّي","مات","ماتت","متّنا","متّتو","ماتو"],["بموت","بتموت","بتموتي","بيموت","بتموت","منموت","بتموتو","بيموتو"]],
+["كبر","byikbir","reg","grow up",["كبرت","كبرت","كبرتي","كبر","كبرت","كبرنا","كبرتو","كبرو"],["بكبر","بتكبر","بتكبري","بيكبر","بتكبر","منكبر","بتكبرو","بيكبرو"]],
+["ساعد","byisaaʕid","reg","help",["ساعدت","ساعدت","ساعدتي","ساعد","ساعدت","ساعدنا","ساعدتو","ساعدو"],["بساعد","بتساعد","بتساعدي","بيساعد","بتساعد","منساعد","بتساعدو","بيساعدو"]],
+["دار","byiduur","hollow","turn",["درت","درت","درتي","دار","دارت","درنا","درتو","دارو"],["بدور","بتدور","بتدوري","بيدور","بتدور","مندور","بتدورو","بيدورو"]],
+["فتح","byiftaH","reg","open",["فتحت","فتحت","فتحتي","فتح","فتحت","فتحنا","فتحتو","فتحو"],["بفتح","بتفتح","بتفتحي","بيفتح","بتفتح","منفتح","بتفتحو","بيفتحو"]],
+["سكر","byiskar","reg","close",["سكّرت","سكّرت","سكّرتي","سكّر","سكّرت","سكّرنا","سكّرتو","سكّرو"],["بسكّر","بتسكّر","بتسكّري","بيسكّر","بتسكّر","منسكّر","بتسكّرو","بيسكّرو"]],
+["كسر","byiksur","reg","break",["كسرت","كسرت","كسرتي","كسر","كسرت","كسرنا","كسرتو","كسرو"],["بكسر","بتكسر","بتكسري","بيكسر","بتكسر","منكسر","بتكسرو","بيكسرو"]],
+["بنى","byibnii","def","build",["بنيت","بنيت","بنيتي","بنى","بنت","بنينا","بنيتو","بنوا"],["ببني","بتبني","بتبني","بيبني","بتبني","منبني","بتبنوا","بيبنوا"]],
+["جمع","byijmaʕ","reg","gather",["جمعت","جمعت","جمعتي","جمع","جمعت","جمعنا","جمعتو","جمعو"],["بجمع","بتجمع","بتجمعي","بيجمع","بتجمع","منجمع","بتجمعو","بيجمعو"]],
+["قطع","byiqTaʕ","reg","cut",["قطعت","قطعت","قطعتي","قطع","قطعت","قطعنا","قطعتو","قطعو"],["بقطع","بتقطع","بتقطعي","بيقطع","بتقطع","منقطع","بتقطعو","بيقطعو"]],
+["دفع","byidfaʕ","reg","push, pay",["دفعت","دفعت","دفعتي","دفع","دفعت","دفعنا","دفعتو","دفعو"],["بدفع","بتدفع","بتدفعي","بيدفع","بتدفع","مندفع","بتدفعو","بيدفعو"]],
+["مسك","byimsik","reg","grab, hold",["مسكت","مسكت","مسكتي","مسك","مسكت","مسكنا","مسكتو","مسكو"],["بمسك","بتمسك","بتمسكي","بيمسك","بتمسك","منمسك","بتمسكو","بيمسكو"]],
+["سحب","byisHab","reg","pull",["سحبت","سحبت","سحبتي","سحب","سحبت","سحبنا","سحبتو","سحبو"],["بسحب","بتسحب","بتسحبي","بيسحب","بتسحب","منسحب","بتسحبو","بيسحبو"]],
+["بعت","byibʕat","reg","send",["بعتت","بعتت","بعتتي","بعت","بعتت","بعتنا","بعتتو","بعتو"],["ببعت","بتبعت","بتبعتي","بيبعت","بتبعت","منبعت","بتبعتو","بيبعتو"]],
+["ضرب","byiDrib","reg","hit",["ضربت","ضربت","ضربتي","ضرب","ضربت","ضربنا","ضربتو","ضربو"],["بضرب","بتضرب","بتضربي","بيضرب","بتضرب","منضرب","بتضربو","بيضربو"]],
+["اشترى","byishtarii","def","buy",["اشتريت","اشتريت","اشتريتي","اشترى","اشتريت","اشترينا","اشتريتو","اشتروا"],["بشتري","بتشتري","بتشتري","بيشتري","بتشتري","منشتري","بتشتروا","بيشتروا"]],
+["باع","byibiiʕ","hollow","sell",["بيعت","بيعت","بيعتي","باع","باعت","بيعنا","بيعتو","باعو"],["ببيع","بتبيع","بتبيعي","بيبيع","بتبيع","منبيع","بتبيعو","بيبيعو"]],
+["فاز","byifuuZ","hollow","win",["فزت","فزت","فزتي","فاز","فازت","فزنا","فزتو","فازو"],["بفوز","بتفوز","بتفوزي","بيفوز","بتفوز","منفوز","بتفوزو","بيفوزو"]],
+["سرع","byisraʕ","reg","hurry",["سرعت","سرعت","سرعتي","سرع","سرعت","سرعنا","سرعتو","سرعو"],["بسرع","بتسرع","بتسرعي","بيسرع","بتسرع","منسرع","بتسرعو","بيسرعو"]],
+["انتظر","byintaZar","reg","wait",["انتظرت","انتظرت","انتظرتي","انتظر","انتظرت","انتظرنا","انتظرتو","انتظرو"],["بنتظر","بتنتظر","بتنتظري","بينتظر","بتنتظر","مننتظر","بتنتظرو","بينتظرو"]],
+["غنّى","byighannii","def","sing",["غنّيت","غنّيت","غنّيتي","غنّى","غنّت","غنّينا","غنّيتو","غنّوا"],["بغنّي","بتغنّي","بتغنّي","بيغنّي","بتغنّي","منغنّي","بتغنّوا","بيغنّوا"]],
+["رقص","byirquS","reg","dance",["رقصت","رقصت","رقصتي","رقص","رقصت","رقصنا","رقصتو","رقصو"],["برقص","بترقص","بترقصي","بيرقص","بترقص","منرقص","بترقصو","بيرقصو"]],
+["ضحك","byiDHak","reg","laugh",["ضحكت","ضحكت","ضحكتي","ضحك","ضحكت","ضحكنا","ضحكتو","ضحكو"],["بضحك","بتضحك","بتضحكي","بيضحك","بتضحك","منضحك","بتضحكو","بيضحكو"]],
+["بكى","byibkii","def","cry",["بكيت","بكيت","بكيتي","بكى","بكت","بكينا","بكيتو","بكوا"],["ببكي","بتبكي","بتبكي","بيبكي","بتبكي","منبكي","بتبكوا","بيبكوا"]],
+["فرح","byifraH","reg","be happy",["فرحت","فرحت","فرحتي","فرح","فرحت","فرحنا","فرحتو","فرحو"],["بفرح","بتفرح","بتفرحي","بيفرح","بتفرح","منفرح","بتفرحو","بيفرحو"]],
+["غضب","byighaDab","reg","be angry",["غضبت","غضبت","غضبتي","غضب","غضبت","غضبنا","غضبتو","غضبو"],["بغضب","بتغضب","بتغضبي","بيغضب","بتغضب","منغضب","بتغضبو","بيغضبو"]],
+["خاف","byikhaaf","hollow","fear",["خفت","خفت","خفتي","خاف","خافت","خفنا","خفتو","خافو"],["بخاف","بتخاف","بتخافي","بيخاف","بتخاف","منخاف","بتخافو","بيخافو"]],
+["اشتاق","byishtaaq","hollow","miss, long for",["اشتقت","اشتقت","اشتقتي","اشتاق","اشتاقت","اشتقنا","اشتقتو","اشتاقو"],["بشتاق","بتشتاق","بتشتاقي","بيشتاق","بتشتاق","منشتاق","بتشتاقو","بيشتاقو"]],
+["تعب","byitʕab","reg","get tired",["تعبت","تعبت","تعبتي","تعب","تعبت","تعبنا","تعبتو","تعبو"],["بتعب","بتتعب","بتتعبي","بيتعب","بتتعب","منتعب","بتتعبو","بيتعبو"]],
+["جرح","byijraH","reg","wound",["جرحت","جرحت","جرحتي","جرح","جرحت","جرحنا","جرحتو","جرحو"],["بجرح","بتجرح","بتجرحي","بجرح","بتجرح","منجرح","بتجرحو","بجرحو"]],
+["درس","byidrus","reg","study",["درست","درست","درستي","درس","درست","درسنا","درستو","درسو"],["بدرس","بتدرس","بتدرسي","بيدرس","بتدرس","مندرس","بتدرسو","بيدرسو"]],
+["درّس","byidarris","reg","teach",["درّست","درّست","درّستي","درّس","درّست","درّسنا","درّستو","درّسو"],["بدرّس","بتدرّس","بتدرّسي","بيدرّس","بتدرّس","مندرّس","بتدرّسو","بيدرّسو"]],
+["تعلّم","byitʕallam","reg","learn",["تعلّمت","تعلّمت","تعلّمتي","تعلّم","تعلّمت","تعلّمنا","تعلّمتو","تعلّمو"],["بتعلّم","بتتعلّم","بتتعلّمي","بيتعلّم","بتتعلّم","منتعلّم","بتتعلّمو","بيتعلّمو"]],
+["نجح","byinjaH","reg","succeed",["نجحت","نجحت","نجحتي","نجح","نجحت","نجحنا","نجحتو","نجحو"],["بنجح","بتنجح","بتنجحي","بينجح","بتنجح","مننجح","بتنجحو","بينجحو"]],
+["بحث","byibḤath","reg","search",["بحثت","بحثت","بحثتي","بحث","بحثت","بحثنا","بحثتو","بحثو"],["ببحث","بتبحث","بتبحثي","بيبحث","بتبحث","منبحث","بتبحثو","بيبحثو"]],
+["كشف","byikshaf","reg","discover",["كشفت","كشفت","كشفتي","كشف","كشفت","كشفنا","كشفتو","كشفو"],["بكشف","بتكشف","بتكشفي","بيكشف","بتكشف","منكشف","بتكشفو","بيكشفو"]],
+["نسخ","byinsakh","reg","copy",["نسخت","نسخت","نسختي","نسخ","نسخت","نسخنا","نسختو","نسخو"],["بنسخ","بتنسخ","بتنسخي","بينسخ","بتنسخ","مننسخ","بتنسخو","بينسخو"]],
+["حمّل","byiHammi","reg","download",["حمّلت","حمّلت","حمّلتي","حمّل","حمّلت","حمّلنا","حمّلتو","حمّلو"],["بحمّل","بتحمّل","بتحمّلي","بيحمّل","بتحمّل","منحمّل","بتحمّلو","بيحمّلو"]],
+["شغّل","byishaggil","reg","operate, turn on",["شغّلت","شغّلت","شغّلتي","شغّل","شغّلت","شغّلنا","شغّلتو","شغّلو"],["بشغّل","بتشغّل","بتشغّلي","بيشغّل","بتشغّل","منشغّل","بتشغّلو","بيشغّلو"]],
+["وصل","byiwSil","reg","connect",["وصلت","وصلت","وصلتي","وصل","وصلت","وصلنا","وصلتو","وصلو"],["بوصل","بتوصل","بتوصلي","بيوصل","بتوصل","منوصل","بتوصلو","بيوصلو"]],
+["استخدم","byistakhdum","reg","use",["استخدمت","استخدمت","استخدمتي","استخدم","استخدمت","استخدمنا","استخدمتو","استخدمو"],["بستخدم","بتستخدم","بتستخدمي","بيستخدم","بتستخدم","منستخدم","بتستخدمو","بيستخدمو"]],
+["نظّف","byinazzif","reg","clean",["نظّفت","نظّفت","نظّفتي","نظّف","نظّفت","نظّفنا","نظّفتو","نظّفو"],["بنظّف","بتنظّف","بتنظّفي","بينظّف","بتنظّف","مننظّف","بتنظّفو","بينظّفو"]],
+["كوي","byikwii","def","iron",["كويت","كويت","كويتي","كوى","كوت","كوينا","كويتو","كوا"],["بكوي","بتكوي","بتكوي","بيكوي","بتكوي","منكوي","بتكوا","بيكوا"]],
+["خاط","byikhuuT","hollow","sew",["خطت","خطت","خطتي","خاط","خاطت","خطنا","خطتو","خاطو"],["بخيط","بتخيط","بتخيطي","بيخيط","بتخيط","منخيط","بتخيطو","بيخيطو"]],
+["بيّن","byibayyin","reg","show",["بيّنت","بيّنت","بيّنتي","بيّن","بيّنت","بيّننا","بيّنتو","بيّنو"],["ببيّن","بتبيّن","بتبيّني","بيبيّن","بتبيّن","منبيّن","بتبيّنو","بيبيّنو"]],
+["قام","byiquum","hollow","rise, stand up",["قمت","قمت","قمتي","قام","قامت","قمنا","قمتو","قامو"],["بقوم","بتقوم","بتقومي","بيقوم","بتقوم","منقوم","بتقومو","بيقومو"]],
+["دافع","byidaafiʕ","reg","defend",["دافعت","دافعت","دافعتي","دافع","دافعت","دافعنا","دافعتو","دافعو"],["بدافع","بتدافع","بتدافعي","بيدافع","بتدافع","مندافع","بتدافعو","بيدافعو"]],
+["حارب","byiHaarib","reg","fight (war)",["حاربت","حاربت","حاربتي","حارب","حاربت","حاربنا","حاربتو","حاربو"],["بحارب","بتحارب","بتحاربي","بيحارب","بتحارب","منحارب","بتحاربو","بيحاربو"]],
+["أنقذ","byinqiḍ","reg","rescue",["أنقذت","أنقذت","أنقذتي","أنقذ","أنقذت","أنقذنا","أنقذتو","أنقذو"],["بأنقذ","بتأنقذ","بتأنقذي","بيأنقذ","بتأنقذ","منأنقذ","بتأنقذو","بيأنقذو"]],
+["سرق","byisrig","reg","steal",["سرقت","سرقت","سرقتي","سرق","سرقت","سرقنا","سرقتو","سرقو"],["بسرق","بتسرق","بتسرقي","بيسرق","بتسرق","منسرق","بتسرقو","بيسرقو"]],
+["أحرق","byiHraq","reg","burn",["أحرقت","أحرقت","أحرقتي","أحرق","أحرقت","أحرقنا","أحرقتو","أحرقو"],["بأحرق","بتأحرق","بتأحرقي","بيأحرق","بتأحرق","منأحرق","بتأحرقو","بيأحرقو"]],
+["غرق","byighraq","reg","drown",["غرقت","غرقت","غرقتي","غرق","غرقت","غرقنا","غرقتو","غرقو"],["بغرق","بتغرق","بتغرقي","بيغرق","بتغرق","منغرق","بتغرقو","بيغرقو"]],
+["جاب","byijiib","hollow","bring",["جبت","جبت","جبتي","جاب","جابت","جبنا","جبتو","جابو"],["بجيب","بتجيب","بتجيبي","بيجيب","بتجيب","منجيب","بتجيبو","بيجيبو"]],
+["ساوى","byisaawii","def","equal",["ساويت","ساويت","ساويتي","ساوى","ساوت","ساوينا","ساويتو","ساووا"],["بساوي","بتساوي","بتساوي","بيساوي","بتساوي","منساوي","بتساووا","بيساووا"]],
+["غير","byighayyar","reg","change (something)",["غيرت","غيرت","غيرتي","غير","غيرت","غيرنا","غيرتو","غيرو"],["بغيّر","بتغيّر","بتغيّري","بيغيّر","بتغيّر","منغيّر","بتغيّرو","بيغيّرو"]],
+
+];
+
 const cache=new Map();
-
-function ar2tr(w){
-  let s='';
-  for(const c of w){s+=(T[c]||c);}
-  return s;
-}
-
-function makeStems(entry){
-  const [past3,pres3,type,gloss]=entry;
-  
-  if(type==='irr'){
-    const irr=IRREGULAR[past3];
-    if(!irr) return null;
-    return {
-      past: irr.past.map(a=>({ar:a,tr:ar2tr(a),segs:[[ar2tr(a),'c']]})),
-      pres: irr.pres.map(a=>({ar:a,tr:ar2tr(a),segs:[]})),
-      kind: irr.kind,
-      gloss
-    };
-  }
-
-  // Parse hollow: "راح|رح" -> 3ms=راح, short=رح
-  let pastStem3=past3, pastStemShort=past3;
-  if(type==='hollow'){
-    const parts=past3.split('|');
-    pastStem3=parts[0];
-    pastStemShort=parts[1]||parts[0];
-  }
-
-  // Present stem: remove byi/bya prefix
-  let presStem='';
-  if(pres3.startsWith('byi')) presStem=pres3.slice(3);
-  else if(pres3.startsWith('bya')) presStem=pres3.slice(3);
-  else presStem=pres3;
-
-  const past=[], pres=[];
-  const pastTr3=ar2tr(pastStem3);
-  const pastTrShort=ar2tr(pastStemShort);
-  const presTr=ar2tr(presStem);
-
-  // Arabic present stem: reg/doubled reuse past stem; hollow/def lookup manually
-  let presAr;
-  if(type==='reg'||type==='doubled'){
-    presAr=pastStemShort;
-  }else if(type==='hollow'||type==='def'){
-    presAr=PRES_AR[past3];
-    if(!presAr) return null;
-  }
-
-  if(type==='reg'||type==='doubled'){
-    past.push({ar:pastStemShort+'ت',  tr:pastTrShort+'t',  segs:[[pastTrShort,'t'],['t','s']]});
-    past.push({ar:pastStemShort+'ت',  tr:pastTrShort+'t',  segs:[[pastTrShort,'t'],['t','s']]});
-    past.push({ar:pastStemShort+'تي', tr:pastTrShort+'ti', segs:[[pastTrShort,'t'],['ti','s']]});
-    past.push({ar:pastStem3,          tr:pastTr3,          segs:[[pastTr3,'t']]});
-    past.push({ar:pastStem3+'ت',      tr:pastTr3+'t',      segs:[[pastTr3,'t'],['t','s']]});
-    past.push({ar:pastStemShort+'نا', tr:pastTrShort+'na', segs:[[pastTrShort,'t'],['na','s']]});
-    past.push({ar:pastStemShort+'تو', tr:pastTrShort+'tu', segs:[[pastTrShort,'t'],['tu','s']]});
-    past.push({ar:pastStem3+'و',      tr:pastTr3+'u',      segs:[[pastTr3,'t'],['u','s']]});
-  } else if(type==='hollow'){
-    past.push({ar:pastStemShort+'ت',  tr:pastTrShort+'t',  segs:[[pastTrShort,'c'],['t','s']]});
-    past.push({ar:pastStemShort+'ت',  tr:pastTrShort+'t',  segs:[[pastTrShort,'c'],['t','s']]});
-    past.push({ar:pastStemShort+'تي', tr:pastTrShort+'ti', segs:[[pastTrShort,'c'],['ti','s']]});
-    past.push({ar:pastStem3,          tr:pastTr3,          segs:[[pastTr3,'t']]});
-    past.push({ar:pastStem3+'ت',      tr:pastTr3+'t',      segs:[[pastTr3,'t'],['t','s']]});
-    past.push({ar:pastStemShort+'نا', tr:pastTrShort+'na', segs:[[pastTrShort,'c'],['na','s']]});
-    past.push({ar:pastStemShort+'تو', tr:pastTrShort+'tu', segs:[[pastTrShort,'c'],['tu','s']]});
-    past.push({ar:pastStem3+'و',      tr:pastTr3+'u',      segs:[[pastTr3,'t'],['u','s']]});
-  } else if(type==='def'){
-    const base=pastStem3.replace(/ى$/,'').replace(/ا$/,'').replace(/ي$/,'');
-    const baseTr=ar2tr(base);
-    past.push({ar:base+'يت',   tr:baseTr+'īt',   segs:[[baseTr,'c'],['īt','s']]});
-    past.push({ar:base+'يت',   tr:baseTr+'īt',   segs:[[baseTr,'c'],['īt','s']]});
-    past.push({ar:base+'يتي',  tr:baseTr+'īti',  segs:[[baseTr,'c'],['īti','s']]});
-    past.push({ar:pastStem3,    tr:pastTr3,       segs:[[pastTr3,'t']]});
-    past.push({ar:base+'ت',     tr:baseTr+'t',    segs:[[baseTr,'c'],['t','s']]});
-    past.push({ar:base+'ينا',  tr:baseTr+'īna',  segs:[[baseTr,'c'],['īna','s']]});
-    past.push({ar:base+'يتو',  tr:baseTr+'ītu',  segs:[[baseTr,'c'],['ītu','s']]});
-    past.push({ar:base+'وا',   tr:baseTr+'u',    segs:[[baseTr,'c'],['u','s']]});
-  }
-
-  // Present tense
-  const pPref=['ب','بت','بت','بي','بت','من','بت','بي'];
-  const pPrefTr=['b','bt','bt','by','bt','mn','bt','by'];
-  const pSuf=['','','ي','','','','و','و'];
-  const pSufTr=['','','i','','','','u','u'];
-
-  for(let i=0;i<8;i++){
-    const wordAr=pPref[i]+presAr+(pSuf[i]||'');
-    const wordTr=pPrefTr[i]+presTr+(pSufTr[i]||'');
-    const segs=[[pPrefTr[i],'p'],[presTr,'t']];
-    if(pSuf[i]) segs.push([pSufTr[i],'s']);
-    pres.push({ar:wordAr,tr:wordTr,segs});
-  }
-
-  const kindMap={reg:'regular',hollow:'hollow',def:'defective',doubled:'doubled'};
-  return {past,pres,kind:kindMap[type]||type,gloss};
-}
-
 function getConj(i){
-  if(!cache.has(i)) cache.set(i,makeStems(VERBS[i]));
-  return cache.get(i);
+  if(cache.has(i)) return cache.get(i);
+  const v=VERBS[i];
+  const past=v[4].map(a=>({ar:a}));
+  const pres=v[5].map(a=>({ar:a}));
+  const kindMap={reg:'regular',hollow:'hollow',def:'defective',doubled:'doubled',irr:'irregular'};
+  const c={past,pres,kind:kindMap[v[2]]||v[2],gloss:v[3]};
+  cache.set(i,c);
+  return c;
 }
 
-function fold(s){
-  return s.toLowerCase().replace(/[āīūḥṭṣḍẓʿʾ]/g,c=>({ā:'a',ī:'i',ū:'u',ḥ:'h',ṭ:'t',ṣ:'s',ḍ:'d',ẓ:'z',ʿ:'',ʾ:''})[c]);
-}
+function fold(s){return s.toLowerCase().replace(/[āīūḥṭṣḍẓʿʾ]/g,c=>({ā:'a',ī:'i',ū:'u',ḥ:'h',ṭ:'t',ṣ:'s',ḍ:'d',ẓ:'z',ʿ:'',ʾ:''})[c]);}
 
-const INDEX=VERBS.map((v,i)=>{
-  const c=getConj(i);
-  if(!c) return null;
-  return {i,ar:v[0]+' '+v[1],tr:fold(v[0]+' '+v[1]),gl:v[3].toLowerCase()};
-}).filter(Boolean);
+const INDEX=VERBS.map((v,i)=>({i,ar:v[0]+' '+v[1],tr:fold(v[0]+' '+v[1]),gl:v[3].toLowerCase()}));
 
 let cur=0, tense=0, visible=INDEX.map(x=>x.i);
 const $=id=>document.getElementById(id);
-
-function segHtml(segs){
-  return segs.filter(s=>s[0]).map((s,k)=>(k?'<span class="sp">·</span>':'')+'<span class="seg-'+s[1]+'">'+s[0]+'</span>').join('');
-}
 
 function renderList(){
   const L=$('list'); L.innerHTML='';
   const frag=document.createDocumentFragment();
   for(const idx of visible){
     const c=getConj(idx);
-    if(!c) continue;
     const b=document.createElement('button');
     b.className='vrow'; b.setAttribute('role','option');
     b.setAttribute('aria-current',idx===cur?'true':'false');
-    b.innerHTML='<span class="ar">'+c.past[3].ar+'</span><span class="tr">'+c.past[3].tr+'</span><span class="gl">'+VERBS[idx][3]+'</span>';
+    b.innerHTML='<span class="ar">'+c.past[3].ar+'</span><span class="tr">'+VERBS[idx][1]+'</span><span class="gl">'+VERBS[idx][3]+'</span>';
     b.onclick=()=>{cur=idx;renderDetail();renderList();};
     frag.appendChild(b);
   }
@@ -795,18 +229,17 @@ function renderList(){
 
 function renderDetail(){
   const v=VERBS[cur], c=getConj(cur);
-  if(!c){$('bigar').textContent='';$('meta').textContent='';$('kind').textContent='Error';$('tbl').innerHTML='';return;}
   $('bigar').innerHTML=c.past[3].ar+'<span class="pres">'+c.pres[3].ar+'</span>';
-  $('meta').innerHTML='<b>'+c.past[3].tr+'</b> / '+c.pres[3].tr+' — '+v[3];
+  $('meta').innerHTML='<b>'+v[1]+'</b> — '+v[3];
   $('kind').textContent=c.kind;
   document.querySelectorAll('#tabs button').forEach((b,j)=>b.setAttribute('aria-pressed',j===tense?'true':'false'));
-  let rows='<tr><th>Pronoun</th><th>Arabic</th><th>Transliteration</th><th>Built from</th></tr>';
+  let rows='<tr><th>Pronoun</th><th>Arabic</th></tr>';
   for(let r=0;r<8;r++){
-    let ar,tr,segs;
-    if(tense===0){ar=c.past[r].ar;tr=c.past[r].tr;segs=c.past[r].segs;}
-    else if(tense===1){ar=c.pres[r].ar;tr=c.pres[r].tr;segs=c.pres[r].segs;}
-    else{ar='رح '+c.pres[r].ar;tr='raḥ '+c.pres[r].tr;segs=[['raḥ','p']].concat(c.pres[r].segs);}
-    rows+='<tr><td class="pn">'+PRONOUNS[r]+'</td><td class="aw ar">'+ar+'</td><td class="bf">'+tr+'</td><td class="bf">'+segHtml(segs)+'</td></tr>';
+    let ar;
+    if(tense===0){ar=c.past[r].ar;}
+    else if(tense===1){ar=c.pres[r].ar;}
+    else{ar='رح '+c.pres[r].ar;}
+    rows+='<tr><td class="pn">'+PRONOUNS[r]+'</td><td class="aw ar">'+ar+'</td></tr>';
   }
   $('tbl').innerHTML=rows;
 }
