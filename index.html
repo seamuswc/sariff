@@ -146,8 +146,10 @@ $('tabs').appendChild(rnd);
 $('q').addEventListener('input',e=>{
   const q=e.target.value.trim(),qf=fold(q);
   visible=q?INDEX.filter(x=>x.gl.includes(qf)||x.tr.includes(qf)||x.ru.includes(q)).map(x=>x.i):INDEX.map(x=>x.i);
+  if(visible.length===1){cur=visible[0];renderDetail();}
   renderList();
 });
+
 
 renderList();renderDetail();
 
