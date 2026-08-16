@@ -97,7 +97,7 @@ const PAIRS=[
 {g:"get up",i:{v:"вставать",p:["вставал","вставала","вставало","вставали"],n:["встаю","встаёшь","встаёт","встаём","встаёте","встают"],x:"Я встаю рано. — I get up early."},p:{v:"встать",p:["встал","встала","встало","встали"],f:["встану","встанешь","встанет","встанем","встанете","встанут"],x:"Я встану рано. — I will get up early."}},
 {g:"find",i:{v:"находить",p:["находил","находила","находило","находили"],n:["нахожу","находишь","находит","находим","находите","находят"],x:"Я часто нахожу ошибки. — I often find mistakes."},p:{v:"найти",p:["нашёл","нашла","нашло","нашли"],f:["найду","найдёшь","найдёт","найдём","найдёте","найдут"],x:"Я найду ответ. — I will find the answer."}},
 {g:"can",i:{v:"мочь",p:["мог","могла","могло","могли"],n:["могу","можешь","может","можем","можете","могут"],x:"Я могу помочь. — I can help."},p:{v:"смочь",p:["смог","смогла","смогло","смогли"],f:["смогу","сможешь","сможет","сможем","сможете","смогут"],x:"Я смогу помочь. — I will be able to help."}},
-{g:"run",i:{v:"бежать",p:["бежал","бежала","бежало","бежали"],n:["бегу","бежишь","бежит","бежим","бежите","бегут"],x:"Он бежит быстро. — He runs fast."},p:{v:"побежать",p:["побежал","побежала","побежало","побежали"],f:["побегу","побежишь","побежит","побежим","побежите","побегут"],x:"Он побежит домой. — He will run home."}},
+{g:"run",i:{v:"бежать",p:["бежал","бежала","бежало","бежали"],n:["бегу","бежишь","бежит","бежим","бежите","бегут"],x:"Он бежит быстро. — He runs fast."},h:{v:"бегать",p:["бегал","бегала","бегало","бегали"],n:["бегаю","бегаешь","бегает","бегаем","бегаете","бегают"],x:"Я бегаю по утрам. — I run in the mornings."},p:{v:"побежать",p:["побежал","побежала","побежало","побежали"],f:["побегу","побежишь","побежит","побежим","побежите","побегут"],x:"Он побежит домой. — He will run home."}},
 {g:"carry (on foot)",i:{v:"нести",p:["нёс","несла","несло","несли"],n:["несу","несёшь","несёт","несём","несёте","несут"],x:"Я несу сумку. — I am carrying a bag."},p:{v:"понести",p:["понёс","понесла","понесло","понесли"],f:["понесу","понесёшь","понесёт","понесём","понесёте","понесут"],x:"Я понесу сумку. — I will carry the bag."}},
 {g:"drive, chase",i:{v:"гнать",p:["гнал","гнала","гнало","гнали"],n:["гоню","гонишь","гонит","гоним","гоните","гонят"],x:"Он гонит коров. — He is driving the cows."},p:{v:"погнать",p:["погнал","погнала","погнало","погнали"],f:["погоню","погонишь","погонит","погоним","погоните","погонят"],x:"Он погонит коров. — He will drive the cows."}},
 {g:"wash",i:{v:"мыть",p:["мыл","мыла","мыло","мыли"],n:["мою","моешь","моет","моем","моете","моют"],x:"Я мою посуду. — I am washing the dishes."},p:{v:"вымыть",p:["вымыл","вымыла","вымыло","вымыли"],f:["вымою","вымоешь","вымоет","вымоем","вымоете","вымоют"],x:"Я вымою посуду. — I will wash the dishes."}},
@@ -360,7 +360,6 @@ const SINGLES=[
 {g:"sit",i:{v:"сидеть",p:["сидел","сидела","сидело","сидели"],n:["сижу","сидишь","сидит","сидим","сидите","сидят"],x:"Я сижу дома. — I am sitting at home."}},
 {g:"stand",i:{v:"стоять",p:["стоял","стояла","стояло","стояли"],n:["стою","стоишь","стоит","стоим","стоите","стоят"],x:"Он стоит у окна. — He is standing by the window."}},
 {g:"lie (recline)",i:{v:"лежать",p:["лежал","лежала","лежало","лежали"],n:["лежу","лежишь","лежит","лежим","лежите","лежат"],x:"Я лежу на диване. — I am lying on the sofa."}},
-{g:"run (habitual)",i:{v:"бегать",p:["бегал","бегала","бегало","бегали"],n:["бегаю","бегаешь","бегает","бегаем","бегаете","бегают"],x:"Я бегаю по утрам. — I run in the mornings."}},
 {g:"fly (habitual)",i:{v:"летать",p:["летал","летала","летало","летали"],n:["летаю","летаешь","летает","летаем","летаете","летают"],x:"Птицы летают. — Birds fly."}},
 {g:"swim (habitual)",i:{v:"плавать",p:["плавал","плавала","плавало","плавали"],n:["плаваю","плаваешь","плавает","плаваем","плаваете","плавают"],x:"Я плаваю каждый день. — I swim every day."}},
 {g:"go (habitual, transport)",i:{v:"ездить",p:["ездил","ездила","ездило","ездили"],n:["езжу","ездишь","ездит","ездим","ездите","ездят"],x:"Я езжу на работу. — I commute to work."}},
@@ -609,16 +608,16 @@ const FUT_B=["буду","будешь","будет","будем","будете",
 const PAST_L=["он (masc)","она (fem)","оно (neut)","они (plural)"];
 const PRES_L=["я","ты","он/она/оно","мы","вы","они"];
 function fold(s){return s.toLowerCase().replace(/ё/g,'е');}
-const INDEX=PAGES.map((e,i)=>({i,gl:e.g.toLowerCase(),ri:e.i?fold(e.i.v):(e.p?fold(e.p.v):fold(e.v)),rp:e.p?fold(e.p.v):''}));
+const INDEX=PAGES.map((e,i)=>({i,gl:e.g.toLowerCase(),ri:e.i?fold(e.i.v):(e.p?fold(e.p.v):fold(e.v)),rp:e.p?fold(e.p.v):'',rh:e.h?fold(e.h.v):''}));
 let cur=0,side=null,tense=1,visible=INDEX.map(x=>x.i);
 const $=id=>document.getElementById(id);
 
-function tenseVals(s){return s==='i'?[0,1,2]:[0,2];}
+function tenseVals(s){return s==='p'?[0,2]:[0,1,2];}
 function getForms(e,s,t){
   const d=e[s];
   if(t===0)return d.p;
-  if(s==='i')return t===1?d.n:FUT_B.map(b=>b+' '+d.v);
-  return d.f;
+  if(s==='p')return d.f;
+  return t===1?d.n:FUT_B.map(b=>b+' '+d.v);
 }
 
 function renderList(){
@@ -660,13 +659,14 @@ function renderDetail(){
   const e=PAGES[cur];
   if(!side||!e[side])side=e.i?'i':'p';
   const d=e[side];
+  const ASP_L={i:e.h?'imperfective · one-way':'imperfective · habitual',h:'imperfective · habitual',p:'perfective · one-time'};
   $('bigru').textContent=d.v;
-  $('meta').innerHTML='<b>'+e.g+'</b> — '+(side==='i'?'imperfective':'perfective');
+  $('meta').innerHTML='<b>'+e.g+'</b> — '+ASP_L[side];
   const A=$('aspects');A.innerHTML='';
-  for(const s of ['i','p']){
+  for(const s of ['i','h','p']){
     if(!e[s])continue;
     const b=document.createElement('button');
-    b.innerHTML=e[s].v+'<small>'+(s==='i'?'imperfective · habitual':'perfective · one-time')+'</small>';
+    b.innerHTML=e[s].v+'<small>'+ASP_L[s]+'</small>';
     b.setAttribute('aria-pressed',s===side?'true':'false');
     b.onclick=()=>{side=s;if(s==='p'&&tense===1)tense=2;renderDetail();};
     A.appendChild(b);
@@ -696,11 +696,14 @@ function renderDetail(){
 
 $('q').addEventListener('input',e=>{
   const q=e.target.value.trim(),qf=fold(q);
-  visible=q?INDEX.filter(x=>x.gl.includes(qf)||x.ri.includes(qf)||x.rp.includes(qf)).map(x=>x.i):INDEX.map(x=>x.i);
+  let re=null;
+  if(q&&/[a-z]/.test(qf))re=new RegExp('\\b'+qf.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b');
+  visible=q?INDEX.filter(x=>re?re.test(x.gl):(x.ri.includes(qf)||x.rp.includes(qf)||x.rh.includes(qf))).map(x=>x.i):INDEX.map(x=>x.i);
   if(visible.length===1){
     cur=visible[0];
-    const m=INDEX[cur],e=PAGES[cur];
-    side=(e.i&&qf&&fold(e.i.v)!==qf&&e.p&&fold(e.p.v)===qf)?'p':null;
+    const e=PAGES[cur];
+    side=null;
+    if(qf){if(e.p&&fold(e.p.v)===qf)side='p';else if(e.h&&fold(e.h.v)===qf)side='h';}
     renderDetail();
   }
   renderList();
