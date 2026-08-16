@@ -634,7 +634,7 @@ function renderList(){
     if(e.i&&e.p){const s2=document.createElement('span');s2.className='perf';s2.textContent=' · '+e.p.v;ru.appendChild(s2);}
     const gl=document.createElement('span');gl.className='gl';gl.textContent=e.g;
     b.appendChild(ru);b.appendChild(gl);
-    b.onclick=()=>{cur=idx;side=null;renderDetail();renderList();};
+    b.onclick=()=>{cur=idx;side=null;tense=1;renderDetail();renderList();};
     frag.appendChild(b);
   }
   L.appendChild(frag);
@@ -649,7 +649,7 @@ function mkRnd(){
     const pool=visible.length?visible:INDEX.map(x=>x.i);
     let pick=pool[Math.floor(Math.random()*pool.length)];
     if(pool.length>1)while(pick===cur)pick=pool[Math.floor(Math.random()*pool.length)];
-    cur=pick;side=null;renderDetail();renderList();
+    cur=pick;side=null;tense=1;renderDetail();renderList();
     const row=document.querySelector('.vrow[aria-current="true"]'),list=$('list');
     if(row){const r=row.getBoundingClientRect(),l=list.getBoundingClientRect();if(r.top<l.top)list.scrollTop-=(l.top-r.top);else if(r.bottom>l.bottom)list.scrollTop+=(r.bottom-l.bottom);}
   };
@@ -705,6 +705,7 @@ $('q').addEventListener('input',e=>{
     const e=PAGES[cur];
     side=null;
     if(qf){if(e.p&&fold(e.p.v)===qf)side='p';else if(e.h&&fold(e.h.v)===qf)side='h';}
+    tense=(side==='p')?2:1;
     renderDetail();
   }
   renderList();
