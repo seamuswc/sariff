@@ -54,10 +54,6 @@ th{text-align:start;font-size:11.5px;text-transform:uppercase;letter-spacing:.07
 td{padding:10px;border-bottom:1px solid var(--line);vertical-align:middle}
 td.pn{color:var(--muted);font-size:12.5px;white-space:nowrap}
 td.ruw{font-size:22px;font-weight:500}
-tr.sect th{padding:20px 10px 8px;color:var(--ink);font-size:15px;font-weight:600;text-transform:none;letter-spacing:0;border-bottom:1px solid var(--line2)}
-tr.sect th small{color:var(--muted);font-weight:400;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
-td.note{white-space:normal;font-size:13.5px;font-style:italic;padding:12px 10px}
-.aspects:empty{margin:0}
 footer{padding:20px 30px;color:var(--muted);font-size:12px;border-top:1px solid var(--line)}
 </style>
 </head>
@@ -662,40 +658,20 @@ function mkRnd(){
 
 function renderDetail(){
   const e=PAGES[cur];
-  const labels={0:'Past',1:'Present',2:'Future'};
-  const A=$('aspects');A.innerHTML='';
-  if(e.i&&e.p){
-    $('bigru').textContent=e.i.v+' · '+e.p.v;
-    $('meta').innerHTML='<b>'+e.g+'</b> — imperfective · perfective';
-    const T=$('tabs');T.innerHTML='';
-    for(const t of [0,1,2]){
-      const b=document.createElement('button');b.textContent=labels[t];
-      b.setAttribute('aria-pressed',t===tense?'true':'false');
-      b.onclick=()=>{tense=t;renderDetail();};
-      T.appendChild(b);
-    }
-    T.appendChild(mkRnd());
-    let rows='';
-    for(const s of ['i','p']){
-      const d=e[s],f=getForms(e,s,tense);
-      rows+='<tr class="sect"><th colspan="2">'+d.v+' <small>· '+(s==='i'?'imperfective':'perfective')+'</small></th></tr>';
-      if(tense===0){
-        for(let r=0;r<4;r++)rows+='<tr><td class="pn">'+PAST_L[r]+'</td><td class="ruw">'+f[r]+'</td></tr>';
-      }else if(s==='p'&&tense===1){
-        rows+='<tr><td class="pn note" colspan="2">No present tense — the perfective future ('+e.p.f[0]+'…) is used instead.</td></tr>';
-      }else{
-        for(let r=0;r<6;r++)rows+='<tr><td class="pn">'+PRES_L[r]+'</td><td class="ruw">'+f[r]+'</td></tr>';
-      }
-    }
-    $('tbl').innerHTML=rows;
-    $('example').innerHTML=(e.i.x||'')+'<br>'+(e.p.x||'');
-    return;
-  }
   if(!side||!e[side])side=e.i?'i':'p';
   const d=e[side];
   $('bigru').textContent=d.v;
   $('meta').innerHTML='<b>'+e.g+'</b> — '+(side==='i'?'imperfective':'perfective');
-  const tvals=tenseVals(side);
+  const A=$('aspects');A.innerHTML='';
+  for(const s of ['i','p']){
+    if(!e[s])continue;
+    const b=document.createElement('button');
+    b.innerHTML=e[s].v+'<small>'+(s==='i'?'imperfective · habitual':'perfective · one-time')+'</small>';
+    b.setAttribute('aria-pressed',s===side?'true':'false');
+    b.onclick=()=>{side=s;if(s==='p'&&tense===1)tense=2;renderDetail();};
+    A.appendChild(b);
+  }
+  const tvals=tenseVals(side),labels={0:'Past',1:'Present',2:'Future'};
   if(!tvals.includes(tense))tense=tvals[1];
   const T=$('tabs');T.innerHTML='';
   for(const t of tvals){
