@@ -60,7 +60,7 @@ footer{padding:20px 30px;color:var(--muted);font-size:12px;border-top:1px solid 
 <body>
 <header>
   <h1>Russian Verb Conjugator · sarrif</h1>
-  <p>907 verbs · aspect pairs on one page · past, present, future</p>
+  <p>909 verbs · aspect pairs on one page · past, present, future</p>
 </header>
 <div class="wrap">
   <div class="side">
@@ -79,6 +79,7 @@ footer{padding:20px 30px;color:var(--muted);font-size:12px;border-top:1px solid 
 </div>
 <footer>Support — ETH: <span id="ethaddr" style="font-family:ui-monospace,Menlo,monospace;word-break:break-all;user-select:all;cursor:pointer" title="Click to copy">0x7598557A58F1F0972EE7b66214D546a3328065bE</span></footer>
 <script>
+
 // SARRIF verb data — manually verified. One entry per aspect pair (or single aspect).
 // i = imperfective {v:infinitive, p:past[4], n:present[6], x:example}
 // p = perfective   {v:infinitive, p:past[4], f:future[6], x:example}
@@ -604,7 +605,11 @@ const NEWMOTION=[
 {g:"climb",i:{v:"лезть",p:["лез","лезла","лезло","лезли"],n:["лезу","лезешь","лезет","лезем","лезете","лезут"],x:"Кот лезет на дерево. — The cat is climbing the tree."},h:{v:"лазить",p:["лазил","лазила","лазило","лазили"],n:["лажу","лазишь","лазит","лазим","лазите","лазят"],x:"Дети лазят по деревьям. — The kids climb trees."},p:{v:"полезть",p:["полез","полезла","полезло","полезли"],f:["полезу","полезешь","полезет","полезем","полезете","полезут"],x:"Я полезу на крышу. — I will climb onto the roof."}},
 {g:"trudge, wander",i:{v:"брести",p:["брёл","брела","брело","брели"],n:["бреду","бредёшь","бредёт","бредём","бредёте","бредут"],x:"Он бредёт по дороге. — He trudges along the road."},h:{v:"бродить",p:["бродил","бродила","бродило","бродили"],n:["брожу","бродишь","бродит","бродим","бродите","бродят"],x:"Она бродит по городу. — She wanders around the city."},p:{v:"побрести",p:["побрёл","побрела","побрело","побрели"],f:["побреду","побредёшь","побредёт","побредём","побредёте","побредут"],x:"Он побредёт домой. — He will trudge home."}},
 ];
-const PAGES=PAIRS.concat(SINGLES,NEWPAIRS,NEWPAIRS2,NEWSINGLES,NEWPAIRS3,NEWPAIRS4,NEWSINGLES2,NEWMOTION);
+const NEWADD=[
+{g:"walk, stroll",i:{v:"гулять",p:["гулял","гуляла","гуляло","гуляли"],n:["гуляю","гуляешь","гуляет","гуляем","гуляете","гуляют"],x:"Мы гуляем в парке. — We are walking in the park."},p:{v:"погулять",p:["погулял","погуляла","погуляло","погуляли"],f:["погуляю","погуляешь","погуляет","погуляем","погуляете","погуляют"],x:"Мы погуляем после ужина. — We will take a walk after dinner."}}
+];
+
+const PAGES=PAIRS.concat(SINGLES,NEWPAIRS,NEWPAIRS2,NEWSINGLES,NEWPAIRS3,NEWPAIRS4,NEWSINGLES2,NEWMOTION,NEWADD);
 const FUT_B=["буду","будешь","будет","будем","будете","будут"];
 const PAST_L=["он (masc)","она (fem)","оно (neut)","они (plural)"];
 const PRES_L=["я","ты","он/она/оно","мы","вы","они"];
@@ -724,6 +729,7 @@ ea.addEventListener('click',async()=>{
   catch(e){const r=document.createRange();r.selectNodeContents(ea);const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges();}
   ea.textContent='Copied!';setTimeout(()=>ea.textContent=addr,1200);
 });
+
 
 </script>
 </body>
